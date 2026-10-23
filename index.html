@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220"><title>Instrutor Diego Andrade • Pro</title>
+<!-- Vinculação do Manifest para o PWABuilder -->
+<link rel="manifest" href="./manifest.json">
+<style>
+:root{--bg:#0b1220;--panel:#121d2e;--panel2:#19283d;--line:#2b3d55;--txt:#f4f7fb;--muted:#9aabc1;--blue:#4ab0ff;--cyan:#35d5ce;--green:#42d7a0;--yellow:#ffd06d;--red:#ff7183;--purple:#b7a0ff;--input-bg:#0b1525;--preview-bg:#ffffff;--preview-txt:#1e293b}
+
+body.light-mode {
+  --bg: #f0f4f9;
+  --panel: #ffffff;
+  --panel2: #e2e8f0;
+  --line: #cbd5e1;
+  --txt: #0f172a;
+  --muted: #475569;
+  --blue: #0284c7;
+  --cyan: #0d9488;
+  --green: #16a34a;
+  --yellow: #d97706;
+  --red: #dc2626;
+  --purple: #7c3aed;
+  --input-bg: #f8fafc;
+}
+
+*{box-sizing:border-box}
+html, body{height:100%;margin:0;padding:0;overflow:hidden;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--txt);transition:background 0.3s, color 0.3s}
+
+.app{max-width:900px;margin:auto;height:100vh;display:flex;flex-direction:column;padding:10px 10px 0;position:relative}
+.hero{padding:12px 16px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(135deg,var(--panel2),var(--panel));display:flex;gap:12px;align-items:center;box-shadow:0 10px 25px #0002;flex-shrink:0}
+.logo{width:45px;height:45px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#071525;font-weight:950;font-size:20px;flex-shrink:0}
+.eyebrow{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);font-weight:900}
+.hero h1{font-size:18px;line-height:1.15;margin:2px 0}
+.hero p{font-size:11px;color:var(--muted);margin:0}
+
+/* Botão de Tema Pequeno na Parte Inferior */
+.theme-btn-bottom {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 4px 10px;
+  background: var(--panel2);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0.85;
+}
+.theme-btn-bottom:hover { opacity: 1; color: var(--txt); }
+
+.nav{display:flex;gap:6px;overflow-x:auto;padding:8px 0;flex-shrink:0;background:transparent}
+.nav button,.tab{white-space:nowrap;background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:8px 12px;font-size:11px;font-weight:800;cursor:pointer}
+.nav button.active,.tab.active{background:var(--blue);color:#fff;border-color:var(--cyan)}
+
+.main-content{flex:1;overflow-y:auto;padding-bottom:35px;scroll-behavior:smooth}
+
+.page{display:none}.page.active{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:10px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.head h2,h2{font-size:15px;margin:0 0 10px}.head h2{margin:0}
+.muted{color:var(--muted)}.tiny{font-size:11px;line-height:1.4;color:var(--muted)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.full{grid-column:1/-1}
+.field label{display:block;color:var(--muted);font-size:10px;font-weight:800;margin-bottom:4px}
+input,select,textarea{width:100%;background:var(--input-bg);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:9px;font:inherit;font-size:12px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+textarea{min-height:70px;resize:vertical}
+
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{border:1px solid transparent;border-radius:10px;padding:9px 12px;font-weight:850;font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#071525}
+.btn.secondary{background:var(--panel2);color:var(--txt);border-color:var(--line)}
+.btn.success{background:#1b4d3e;color:#85f3c6;border-color:#2a7a61}
+.btn.danger{background:#49212c;color:#ffb3bd;border-color:#713341}
+.btn.warning{background:#5c4314;color:#ffe083;border-color:#8a661c}
+.btn.small{padding:6px 8px;font-size:10px}
+.btn:active,.nav button:active{transform:scale(.98)}
+
+/* Seletores Estilizados para Orçamento e Cadastro */
+.budget-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 4px;
+}
+.budget-opt-btn {
+  background: var(--input-bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 8px 6px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+.budget-opt-btn.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--cyan);
+  box-shadow: 0 4px 12px rgba(74, 176, 255, 0.3);
+}
+
+/* Perfil e Foto do Aluno (Centralizado) */
+.photo-upload-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--input-bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+}
+.student-avatar-preview {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid var(--cyan);
+  background: var(--panel2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--muted);
+  flex-shrink: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+.student-avatar-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.student-card-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--cyan);
+  flex-shrink: 0;
+  background: var(--panel2);
+  cursor: zoom-in;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.student-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Modal de Zoom da Foto do Aluno */
+.photo-zoom-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(7, 15, 30, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 10005;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease forwards;
+  cursor: zoom-out;
+}
+.photo-zoom-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.photo-zoom-container img {
+  width: 100%;
+  height: auto;
+  max-width: 380px;
+  max-height: 380px;
+  object-fit: contain;
+  border-radius: 18px;
+  border: 2px solid var(--cyan);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 25px rgba(53, 213, 206, 0.3);
+}
+.photo-zoom-name {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(18, 29, 46, 0.9);
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+/* Seletor customizado de aluno */
+.student-picker-trigger {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--txt);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.student-picker-trigger:hover {
+  border-color: var(--blue);
+}
+.student-picker-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(7, 15, 30, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 10002;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease forwards;
+}
+.student-picker-card {
+  background: var(--panel);
+  border: 1px solid var(--cyan);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.student-picker-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 2px;
+}
+.student-picker-item {
+  background: var(--input-bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.student-picker-item:hover {
+  border-color: var(--cyan);
+  background: var(--panel2);
+  transform: translateY(-1px);
+}
+.picker-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--cyan);
+  background: var(--panel2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--muted);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.picker-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.picker-info {
+  flex: 1;
+  min-width: 0;
+}
+.picker-info strong {
+  font-size: 13px;
+  color: var(--txt);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.picker-info small {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.metric{background:var(--input-bg);border:1px solid var(--line);border-radius:12px;padding:9px 6px}
+.metric b{font-size:22px;display:block;line-height:1.2}
+.metric span{font-size:9px;color:var(--muted)}
+.metric.blue{border-color:var(--blue);background:var(--panel2)}
+.status{margin-top:8px;border-radius:10px;padding:9px;font-size:11px;font-weight:850;background:#123a31;color:var(--green)}
+.status.warn{background:#49391d;color:var(--yellow)}
+.status.bad{background:#4b202b;color:#ff9aa6}
+
+/* Placar Flutuante em Tempo Real */
+.floating-live-score {
+  background: var(--panel);
+  border: 1px solid var(--cyan);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 5px;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+.live-score-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.live-stat {
+  text-align: left;
+}
+.live-stat b {
+  font-size: 16px;
+  display: block;
+  line-height: 1.1;
+  color: var(--cyan);
+  transition: color 0.3s;
+}
+.live-stat span {
+  font-size: 8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.live-status-badge {
+  background: #123a31;
+  color: var(--green);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 900;
+  border: 1px solid rgba(66, 215, 160, 0.4);
+  max-width: 170px;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+}
+.live-status-badge.bad { 
+  background: #4b202b; 
+  color: var(--red); 
+  border-color: rgba(255, 113, 131, 0.5);
+  box-shadow: 0 0 10px rgba(255, 113, 131, 0.3);
+}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.empty{text-align:center;padding:15px 8px;color:var(--muted);font-size:11px}
+.listrow{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.listrow:last-child{border-bottom:0}
+.listrow strong{font-size:12px;display:block}
+.listrow small{font-size:10px;color:var(--muted)}
+.right{text-align:right;white-space:nowrap}
+.score{font-weight:950;font-size:15px}
+.tag{display:inline-block;border-radius:5px;padding:3px 5px;font-size:9px;font-weight:900;margin:2px 0}
+.p05{background:#2d3a4e;color:#b0c4de}
+.p1{background:#183d32;color:#7ce8bd}.p2{background:#433a1d;color:#ffe18a}.p4{background:#482d1e;color:#ffb68e}.p6{background:#4b202b;color:#ff9aa6}.p-incapacidade{background:#462846;color:#e3bbff}
+
+.studentgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.student{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;gap:10px;align-items:flex-start}
+.student-info{flex:1;min-width:0}
+.student strong{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.student .sub{font-size:10px;color:var(--muted);margin:3px 0 8px}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}
+.faultgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fault{background:var(--input-bg);border:1px solid var(--line);border-radius:11px;padding:9px;text-align:left;color:var(--txt);cursor:pointer;min-height:70px}
+.fault strong{display:block;font-size:11px;line-height:1.25;margin:4px 0}
+.fault small{font-size:9px;color:var(--muted)}
+.checkline{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--muted)}
+.checkline input{width:auto;margin-top:2px}
+.note{border-left:3px solid var(--yellow);padding:8px 10px;background:var(--input-bg);border-radius:0 8px 8px 0;font-size:10px;color:var(--yellow);line-height:1.4}
+
+.preview-box{background:var(--preview-bg);color:var(--preview-txt);border-radius:12px;padding:20px;font-size:12px;line-height:1.5;box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+
+/* Modal de Confirmação Moderno */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(7, 15, 30, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease forwards;
+}
+.modal-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 380px;
+  padding: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+  text-align: center;
+  animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.modal-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff7183, #c92a39);
+  color: #fff;
+  display: grid; place-items: center;
+  font-size: 20px; font-weight: 900;
+  margin: 0 auto 12px;
+  box-shadow: 0 5px 15px rgba(255, 113, 131, 0.3);
+}
+.modal-icon.warning {
+  background: linear-gradient(135deg, #ffd06d, #d97706);
+  box-shadow: 0 5px 15px rgba(255, 208, 109, 0.3);
+}
+.modal-card h3 {
+  font-size: 16px; margin: 0 0 6px 0; color: var(--txt);
+}
+.modal-card p {
+  font-size: 12px; color: var(--muted); margin: 0 0 16px 0; line-height: 1.4;
+}
+.modal-btns {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+#toastContainer {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 92%;
+  max-width: 400px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--panel);
+  color: var(--txt);
+  border: 1px solid var(--cyan);
+  padding: 14px 18px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(10px);
+  animation: slideDown 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, fadeOut 0.4s ease 3s forwards;
+  pointer-events: auto;
+}
+.toast .toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  color: #071525;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.toast.error {
+  border-color: var(--red);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.toast.error .toast-icon {
+  background: linear-gradient(135deg, #ff7183, #c92a39);
+  color: #fff;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-15px) scale(0.9); visibility: hidden; }
+}
+
+@media(max-width:480px){
+.hero{padding:10px}.hero h1{font-size:16px}
+.fields,.grid2{grid-template-columns:1fr}.full{grid-column:auto}
+.metrics{grid-template-columns:repeat(2,1fr)}
+.studentgrid{grid-template-columns:1fr}
+.faultgrid{grid-template-columns:1fr 1fr}
+.metric b{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div id="toastContainer"></div>
+<div id="modalContainer"></div>
+
+<div class="app">
+<header class="hero">
+  <div class="logo">DA</div>
+  <div>
+    <div class="eyebrow">Painel profissional do instrutor</div>
+    <h1>Instrutor Diego Andrade</h1>
+    <p>Avaliação prática • acompanhamento de alunos • Categoria B</p>
+  </div>
+</header>
+
+<!-- Botão de Tema Pequeno na parte inferior da tela -->
+<button type="button" class="theme-btn-bottom" id="toggleThemeBtn" onclick="toggleTheme()">☀️ Sol / Escuro</button>
+
+<!-- NAVEGAÇÃO -->
+<nav class="nav no-print" id="nav">
+  <button type="button" class="active" data-page="register">Novo Cadastro</button>
+  <button type="button" data-page="students">Alunos</button>
+  <button type="button" data-page="lesson">Nova avaliação</button>
+  <button type="button" data-page="examList">📋 Lista de prova</button>
+  <button type="button" data-page="approved">🎉 Aprovados</button>
+  <button type="button" data-page="failed">🚨 Reprovados</button>
+  <button type="button" data-page="budget">📲 Orçamento Zap</button>
+  <button type="button" data-page="dashboard">Visão geral</button>
+  <button type="button" data-page="history">Histórico</button>
+  <button type="button" data-page="settings">Configurações</button>
+</nav>
+
+<div class="main-content">
+  <!-- PÁGINA 1: NOVO CADASTRO COM FOTO E OPÇÕES IGUAIS AO ORÇAMENTO -->
+  <section class="page active" id="register">
+   <div class="card">
+    <h2 id="studentFormTitle">Cadastrar Novo Aluno</h2>
+    <div class="fields">
+      
+      <!-- FOTO DO ALUNO -->
+      <div class="field full">
+        <label>Foto de Identificação do Aluno</label>
+        <div class="photo-upload-container">
+          <div class="student-avatar-preview" id="avatarPreviewContainer">
+            👤
+          </div>
+          <div style="flex:1">
+            <p class="tiny" style="margin:0 0 6px 0">Selecione uma foto da galeria do seu dispositivo.</p>
+            
+            <input type="file" id="galleryInput" accept="image/*" style="display:none">
+            
+            <div class="btns" style="margin:0">
+              <button type="button" class="btn primary small" id="choosePhotoBtn">📁 Selecionar Foto</button>
+              <button type="button" class="btn danger small" id="removePhotoBtn" style="display:none">Remover Foto</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field full"><label>Nome completo *</label><input id="sName" placeholder="Nome do aluno"></div>
+      <div class="field"><label>Telefone (opcional para Zap direto)</label><input id="sPhone" type="tel" placeholder="(21) 99999-9999"></div>
+      
+      <!-- ENDEREÇO LOGO ACIMA DA CATEGORIA -->
+      <div class="field"><label>Endereço completo</label><input id="sAddress" placeholder="Rua, número, bairro, complemento"></div>
+      
+      <!-- SELEÇÃO DE VEÍCULO (CARRO OU MOTO) IDÊNTICO AO ORÇAMENTO -->
+      <div class="field full">
+        <label>Categoria / Veículo</label>
+        <div class="budget-options-grid" style="grid-template-columns: 1fr 1fr;">
+          <button type="button" class="budget-opt-btn active" id="regBtnCatB" onclick="setRegCategory('Carro (Cat. B)')">🚗 Carro (B)</button>
+          <button type="button" class="budget-opt-btn" id="regBtnCatA" onclick="setRegCategory('Moto (Cat. A)')">🏍️ Moto (A)</button>
+        </div>
+      </div>
+      
+      <!-- SELEÇÃO DE PACOTES (2, 5, 10, 15, 20 AULAS E OUTRO COM CAMPO MANUAL) -->
+      <div class="field full">
+        <label>Pacote de Aulas</label>
+        <div class="budget-options-grid">
+          <button type="button" class="budget-opt-btn" onclick="setRegPackage('2 Aulas (Reforço)', 2, this)">2 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setRegPackage('5 Aulas', 5, this)">5 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setRegPackage('10 Aulas', 10, this)">10 Aulas</button>
+          <button type="button" class="budget-opt-btn active" onclick="setRegPackage('15 Aulas (Completo)', 15, this)">15 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setRegPackage('20 Aulas (Intensivo)', 20, this)">20 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setRegPackage('Personalizado', 'outro', this)">Outro</button>
+        </div>
+      </div>
+
+      <!-- CAMPO MANUAL PARA DIGITAR QUANTIDADE DE AULAS QUANDO FOR "OUTRO" -->
+      <div class="field full" id="regCustomPackageContainer" style="display:none;">
+        <label>Digite a quantidade de aulas personalizada:</label>
+        <input id="regCustomPackageInput" type="number" min="1" placeholder="Ex.: 8 ou 12 aulas" oninput="updateRegCustomPackageVal(this.value)">
+      </div>
+
+      <div class="field"><label>Valor Total (R$)</label><input id="sPrice" type="text" placeholder="Ex.: 1.200,00"></div>
+      <div class="field"><label>Data de início</label><input id="sStart" type="date"></div>
+
+      <!-- FORMAS DE PAGAMENTO PRÉ-PRONTAS -->
+      <div class="field full">
+        <label>Forma de Pagamento</label>
+        <div class="budget-options-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <button type="button" class="budget-opt-btn active" id="regPayPix" onclick="setRegPaymentMode('Pix (À vista)')">⚡ Pix</button>
+          <button type="button" class="budget-opt-btn" id="regPayDebit" onclick="setRegPaymentMode('Cartão de Débito')">💳 Débito</button>
+          <button type="button" class="budget-opt-btn" id="regPayCredit" onclick="setRegPaymentMode('Cartão de Crédito')">💳 Crédito</button>
+        </div>
+      </div>
+
+      <!-- SELETOR DE PARCELAS (CRÉDITO) -->
+      <div class="field full" id="regCreditContainer" style="display:none;">
+        <label>Quantidade de Parcelas no Crédito</label>
+        <select id="regInstallments" onchange="updateRegCreditText()">
+          <option value="1x sem juros">1x sem juros</option>
+          <option value="2x sem juros">2x sem juros</option>
+          <option value="3x sem juros">3x sem juros</option>
+          <option value="4x sem juros">4x sem juros</option>
+          <option value="5x sem juros">5x sem juros</option>
+          <option value="6x sem juros">6x sem juros</option>
+          <option value="10x com juros da maquininha">Até 10x (com juros)</option>
+          <option value="12x com juros da maquininha">Até 12x (com juros)</option>
+        </select>
+      </div>
+
+      <div class="field full"><label>Observações</label><textarea id="sNotes" placeholder="Pontos a desenvolver, disponibilidade etc."></textarea></div>
+    </div>
+    <div class="btns">
+      <button type="button" class="btn primary" id="saveStudent">Salvar aluno</button>
+      <button type="button" class="btn secondary" id="cancelStudentEdit" style="display:none">Cancelar edição</button>
+    </div>
+   </div>
+  </section>
+
+  <!-- PÁGINA 2: LISTA DE ALUNOS COM FILTROS DE STATUS E RAIO-X DE ERROS -->
+  <section class="page" id="students">
+   <div class="card">
+    <div class="head">
+      <h2>Alunos Cadastrados</h2>
+      <button type="button" class="btn primary small" onclick="go('register')">+ Cadastrar Aluno</button>
+    </div>
+    <span class="tiny" id="studentCount">0 alunos cadastrados</span>
+    
+    <!-- FILTROS POR STATUS -->
+    <div class="tabs" id="studentStatusTabs" style="margin-top:10px;">
+      <button type="button" class="tab active" onclick="setStudentFilter('all', this)">Todos</button>
+      <button type="button" class="tab" onclick="setStudentFilter('cursando', this)">Cursando</button>
+      <button type="button" class="tab" onclick="setStudentFilter('aguardando', this)">Aguardando Prova</button>
+      <button type="button" class="tab" onclick="setStudentFilter('aprovado', this)">Aprovados</button>
+      <button type="button" class="tab" onclick="setStudentFilter('reprovado', this)">Reprovados</button>
+    </div>
+
+    <div class="field" style="margin:10px 0"><label>Buscar aluno</label><input id="studentSearch" placeholder="Digite o nome do aluno"></div>
+    <div id="studentList" class="studentgrid"><div class="empty">Nenhum aluno cadastrado.</div></div>
+   </div>
+  </section>
+
+  <!-- PÁGINA 3: NOVA AVALIAÇÃO (LIMPA E DIRETA) -->
+  <section class="page" id="lesson">
+   <!-- PLACAR FLUTUANTE DINÂMICO -->
+   <div class="floating-live-score" id="floatingLiveScore">
+     <div class="live-score-info">
+       <div class="live-stat">
+         <b id="livePoints">0 / 10</b>
+         <span>Pts Negativos</span>
+       </div>
+       <div style="width:1px; height:24px; background:var(--line);"></div>
+       <div class="live-stat">
+         <b id="liveIncap">0 / 2</b>
+         <span>Incapacidades</span>
+       </div>
+     </div>
+     <div class="live-status-badge" id="liveStatusBadge">🟢 APROVADO</div>
+   </div>
+
+   <!-- CABEÇALHO DO ALUNO EM AVALIAÇÃO -->
+   <div class="card" style="border-color:var(--cyan); background:linear-gradient(135deg, var(--panel2), var(--panel));">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--cyan); font-weight:900;">Aluno em Avaliação</div>
+        <h2 id="activeStudentHeaderName" style="font-size:16px; margin:2px 0 0 0; color:#fff;">Nenhum aluno selecionado</h2>
+        <p id="activeStudentHeaderInfo" style="font-size:11px; color:var(--muted); margin:0;">Toque em "Alunos" para iniciar uma avaliação.</p>
+      </div>
+      <button type="button" class="btn secondary small" onclick="openStudentPicker()">Trocar Aluno</button>
+    </div>
+   </div>
+
+   <div class="card">
+    <div class="head"><h2>Detalhes da Aula</h2><span class="tiny" id="editingLabel">Nova avaliação</span></div>
+    <div class="fields" style="margin-top:10px">
+      <div class="field"><label>Número da aula</label><input id="lNumber" type="number" min="1" value="1" placeholder="Ex.: 1 ou 2"></div>
+      <div class="field"><label>Percurso</label><input id="lRoute" placeholder="Ex.: bairro / via expressa"></div>
+    </div>
+   </div>
+
+   <div class="card">
+    <div class="head"><h2>Placar da avaliação</h2><span class="tiny" id="faultCount">0 erros</span></div>
+    <div class="metrics">
+      <div class="metric blue"><b id="lPoints">0</b><span>Pontos (Máx: 10)</span></div>
+      <div class="metric"><b id="lIncapacidade">0</b><span>Incapacidades (Máx: 1)</span></div>
+      <div class="metric"><b id="l1">0</b><span>Leves · 1 pt</span></div>
+      <div class="metric"><b id="l2">0</b><span>Médias · 2 pts</span></div>
+    </div>
+    <div class="status" id="lStatus">🟢 APROVADO: Dentro do limite de 10 pontos</div>
+    <div class="note" style="margin-top:10px">Regra de Avaliação: Até 10 pontos = APROVADO. 11 pontos ou mais = REPROVADO. 2 Incapacidades Técnicas = REPROVADO.</div>
+   </div>
+   <div class="card">
+    <div class="head"><h2>Registrar falha observada</h2><span class="tiny">Toque em um item</span></div>
+    <div class="tabs" id="faultTabs">
+      <button type="button" class="tab active" data-f="all">Todas</button>
+      <button type="button" class="tab" data-f="1">Leves (1)</button>
+      <button type="button" class="tab" data-f="2">Médias (2)</button>
+      <button type="button" class="tab" data-f="4">Graves (4)</button>
+      <button type="button" class="tab" data-f="6">Gravíssimas (6)</button>
+      <button type="button" class="tab" data-f="incapacidade">Incapacidade Técnica</button>
+    </div>
+    <div class="faultgrid" id="faultCatalog"></div>
+    <div class="fields" style="margin-top:10px">
+      <div class="field"><label>Falha personalizada</label><input id="customFault" placeholder="Descreva o erro"></div>
+      <div class="field"><label>Classificação</label><select id="customPoints"><option value="1">Leve · 1 ponto</option><option value="2">Média · 2 pontos</option><option value="4">Grave · 4 pontos</option><option value="6">Gravíssima · 6 pontos</option><option value="0">Incapacidade Técnica (Eliminatória)</option></select></div>
+    </div>
+    <div class="btns"><button type="button" class="btn secondary" id="addCustom">Adicionar falha personalizada</button></div>
+   </div>
+   <div class="card">
+    <div class="head"><h2>Registro da avaliação</h2><button type="button" class="btn secondary small" id="undoFault">Desfazer último</button></div>
+    <div id="faultLog" class="empty">Ainda não há falhas registradas.</div>
+    
+    <div style="margin-top:14px; border-top:1px solid var(--line); padding-top:12px;">
+      <h3 style="font-size:13px; margin:0 0 8px 0; color:var(--cyan);">Conteúdos praticados na aula de hoje:</h3>
+      <div class="fields">
+        <label class="checkline"><input id="lParking" type="checkbox"> 🅿️ Estacionamento / Baliza</label>
+        <label class="checkline"><input id="lTraffic" type="checkbox"> 🚦 Condução em Trânsito</label>
+        <label class="checkline"><input id="lControls" type="checkbox"> ⚙️ Comandos e Controles</label>
+        <label class="checkline"><input id="lIndependent" type="checkbox"> 🛣️ Condução Independente</label>
+        <label class="checkline"><input id="lHills" type="checkbox"> 🛑 Parada em Aclive (Rampa)</label>
+        <label class="checkline"><input id="lReverse" type="checkbox"> 🔄 Manobra de Ré e Alinhamento</label>
+        <label class="checkline"><input id="lLanes" type="checkbox"> 🔀 Mudança de Faixa / Ultrapassagem</label>
+        <label class="checkline"><input id="lTurns" type="checkbox"> ↩️ Conversões (Esq / Dir)</label>
+        <label class="checkline"><input id="lRoundabouts" type="checkbox"> 🔄 Rotatórias e Cruzamentos</label>
+        <label class="checkline"><input id="lNight" type="checkbox"> 🌙 Condução Noturna / Visibilidade</label>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:12px"><label>Feedback e plano para a próxima aula</label><textarea id="lFeedback" placeholder="Ex.: treinar observação dos retrovisores, sinalização e controle de embreagem..."></textarea></div>
+
+    <div class="btns">
+      <button type="button" class="btn primary" id="saveLesson">Salvar avaliação</button>
+      <button type="button" class="btn success" id="btnPreviewSummary">Ver Resumo & Enviar WhatsApp</button>
+      <button type="button" class="btn danger" id="clearLesson">Limpar formulário</button>
+    </div>
+   </div>
+  </section>
+
+  <!-- PÁGINA 4: LISTA DE PROVA -->
+  <section class="page" id="examList">
+   <div class="card">
+    <div class="head">
+      <h2>📋 Alunos Prontos - Aguardando Prova</h2>
+    </div>
+    <p class="tiny">Alunos que concluíram a carga horária ou foram encaminhados antecipadamente para o exame.</p>
+    <div id="examListContainer" style="margin-top:10px;" class="studentgrid">
+      <div class="empty">Nenhum aluno aguardando prova no momento.</div>
+    </div>
+   </div>
+  </section>
+
+  <!-- PÁGINA 5: APROVADOS -->
+  <section class="page" id="approved">
+   <div class="card">
+    <div class="head">
+      <h2>🎉 Alunos Aprovados no Exame Prático</h2>
+    </div>
+    <p class="tiny">Histórico de alunos que já realizaram o exame e conquistaram a CNH! Clique em "Gerar Cartão" para criar a arte de parabéns.</p>
+    <div id="approvedListContainer" style="margin-top:10px;" class="studentgrid">
+      <div class="empty">Nenhum aluno aprovado registrado.</div>
+    </div>
+   </div>
+  </section>
+
+  <!-- PÁGINA 6: REPROVADOS -->
+  <section class="page" id="failed">
+   <div class="card">
+    <div class="head">
+      <h2>🚨 Alunos Reprovados no Exame Prático</h2>
+    </div>
+    <p class="tiny">Alunos que não passaram no exame e aguardam remarcação ou mais aulas.</p>
+    <div id="failedListContainer" style="margin-top:10px;" class="studentgrid">
+      <div class="empty">Nenhum aluno reprovado registrado.</div>
+    </div>
+   </div>
+  </section>
+
+  <!-- PÁGINA 7: ORÇAMENTO ZAP REFORMULADO -->
+  <section class="page" id="budget">
+   <div class="card">
+    <div class="head">
+      <h2>📲 Gerador de Orçamento para o WhatsApp</h2>
+    </div>
+    <p class="tiny">Selecione o pacote e as condições de pagamento para gerar uma proposta comercial profissional.</p>
+    
+    <div class="fields" style="margin-top:12px;">
+      <div class="field full"><label>Nome do Cliente / Interessado</label><input id="bClientName" placeholder="Ex.: João da Silva"></div>
+      
+      <!-- SELEÇÃO DE VEÍCULO (CARRO OU MOTO) -->
+      <div class="field full">
+        <label>Categoria / Veículo</label>
+        <div class="budget-options-grid" style="grid-template-columns: 1fr 1fr;">
+          <button type="button" class="budget-opt-btn active" id="btnCatB" onclick="setBudgetCategory('Carro (Cat. B)')">🚗 Carro (Categoria B)</button>
+          <button type="button" class="budget-opt-btn" id="btnCatA" onclick="setBudgetCategory('Moto (Cat. A)')">🏍️ Moto (Categoria A)</button>
+        </div>
+      </div>
+
+      <!-- SELEÇÃO DE PACOTES (2, 5, 10, 15, 20 AULAS) -->
+      <div class="field full">
+        <label>Pacote de Aulas</label>
+        <div class="budget-options-grid">
+          <button type="button" class="budget-opt-btn" onclick="setBudgetPackage('2 Aulas (Reforço)', this)">2 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setBudgetPackage('5 Aulas', this)">5 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setBudgetPackage('10 Aulas', this)">10 Aulas</button>
+          <button type="button" class="budget-opt-btn active" onclick="setBudgetPackage('15 Aulas (Completo)', this)">15 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setBudgetPackage('20 Aulas (Intensivo)', this)">20 Aulas</button>
+          <button type="button" class="budget-opt-btn" onclick="setBudgetPackage('Personalizado', this)">Outro</button>
+        </div>
+      </div>
+
+      <div class="field"><label>Valor Total (R$)</label><input id="bPrice" type="text" placeholder="Ex.: 1.200,00"></div>
+      <div class="field"><label>Telefone do Cliente (Opcional p/ Zap direto)</label><input id="bPhone" type="tel" placeholder="(21) 99999-9999"></div>
+
+      <!-- FORMAS DE PAGAMENTO PRÉ-PRONTAS -->
+      <div class="field full">
+        <label>Forma de Pagamento</label>
+        <div class="budget-options-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <button type="button" class="budget-opt-btn active" id="payPix" onclick="setPaymentMode('Pix (À vista)')">⚡ Pix</button>
+          <button type="button" class="budget-opt-btn" id="payDebit" onclick="setPaymentMode('Cartão de Débito')">💳 Débito</button>
+          <button type="button" class="budget-opt-btn" id="payCredit" onclick="setPaymentMode('Cartão de Crédito')">💳 Crédito</button>
+        </div>
+      </div>
+
+      <!-- SELETOR DE PARCELAS (APARECE SÓ SE FOR CRÉDITO) -->
+      <div class="field full" id="creditInstallmentsContainer" style="display:none;">
+        <label>Quantidade de Parcelas no Crédito</label>
+        <select id="bInstallments" onchange="updateCreditPaymentText()">
+          <option value="1x sem juros">1x sem juros</option>
+          <option value="2x sem juros">2x sem juros</option>
+          <option value="3x sem juros">3x sem juros</option>
+          <option value="4x sem juros">4x sem juros</option>
+          <option value="5x sem juros">5x sem juros</option>
+          <option value="6x sem juros">6x sem juros</option>
+          <option value="10x com juros da maquininha">Até 10x (com juros)</option>
+          <option value="12x com juros da maquininha">Até 12x (com juros)</option>
+        </select>
+      </div>
+
+      <div class="field full"><label>Observações / Condições</label><textarea id="bObs" placeholder="Inclui carro/moto duplo comando, busca em domicílio etc."></textarea></div>
+    </div>
+
+    <div class="btns" style="margin-top:14px;">
+      <button type="button" class="btn primary" style="width:100%;" onclick="sendBudgetWhatsApp()">📲 Enviar Orçamento via WhatsApp</button>
+    </div>
+   </div>
+  </section>
+
+  <!-- PÁGINA 8: VISÃO GERAL (LIMPA E DIRETA) -->
+  <section class="page" id="dashboard">
+   <div class="card" style="border-color:var(--cyan)">
+    <div class="head">
+      <h2>📊 Visão Geral do Instrutor</h2>
+    </div>
+    <div class="metrics" style="margin-top:8px;">
+      <div class="metric blue"><b id="mStudents" style="color:var(--cyan)">0</b><span>Alunos Cadastrados</span></div>
+      <div class="metric"><b id="mWaiting" style="color:var(--yellow)">0</b><span>Aguardando Prova</span></div>
+      <div class="metric"><b id="mApprovedPct" style="color:var(--green)">0%</b><span>Taxa de Aprovados</span></div>
+      <div class="metric"><b id="mFailedPct" style="color:var(--red)">0%</b><span>Taxa de Reprovados</span></div>
+    </div>
+    <div class="metrics" style="margin-top:8px;">
+      <div class="metric full" style="grid-column: 1/-1; text-align:center; padding:10px;">
+        <b id="mExamsDone" style="font-size:20px; color:var(--purple);">0</b>
+        <span>Alunos que já fizeram a prova (Aprovados + Reprovados)</span>
+      </div>
+    </div>
+   </div>
+
+   <div class="card">
+    <div class="head"><h2>Última avaliação em andamento</h2><button type="button" class="btn secondary small" onclick="go('lesson')">Abrir avaliação</button></div>
+    <div id="dashCurrent" class="empty">Nenhuma avaliação em andamento.</div>
+   </div>
+  </section>
+
+  <!-- RESUMO DA AULA (PREVIEW WHATSAPP) -->
+  <section class="page" id="summary">
+   <div class="card">
+    <div class="head">
+      <h2>Resumo da Avaliação</h2>
+      <button type="button" class="btn secondary small" onclick="go('lesson')">← Voltar e Editar</button>
+    </div>
+    <p class="tiny">Confira os detalhes da aula antes de enviar ao aluno via WhatsApp:</p>
+    
+    <div id="summaryContent" class="preview-box" style="margin-top:10px;"></div>
+
+    <div class="btns" style="margin-top:15px; display:flex; flex-direction:column; gap:8px;">
+      <button type="button" class="btn primary" id="sendZapDirect" style="width:100%;">📱 Enviar p/ Contato Salvo (Direto)</button>
+      <button type="button" class="btn success" id="sendZapGeneral" style="width:100%;">📲 Escolher Contato (Geral)</button>
+      <button type="button" class="btn secondary" onclick="go('lesson')" style="width:100%;">Voltar à Avaliação</button>
+    </div>
+   </div>
+  </section>
+
+  <!-- HISTÓRICO -->
+  <section class="page" id="history">
+   <div class="card">
+    <div class="head"><h2>Histórico de avaliações</h2><button type="button" class="btn secondary small" id="exportCsv">Exportar CSV</button></div>
+    <div class="fields" style="margin-top:10px">
+      <div class="field"><label>Buscar por aluno</label><input id="hSearch" placeholder="Nome do aluno"></div>
+      <div class="field"><label>Filtrar resultado</label><select id="hResult"><option value="all">Todos</option><option value="within">Aprovados (≤10 pts)</option><option value="over">Reprovados (≥11 pts ou 2 incap.)</option></select></div>
+    </div>
+    <div id="historyList"><div class="empty">Nenhuma avaliação encontrada.</div></div>
+   </div>
+   <div class="card">
+    <h2>Backup e restauração</h2>
+    <div class="btns">
+      <button type="button" class="btn primary" id="backupBtn">Baixar backup completo</button>
+      <label class="btn secondary" for="restoreFile" style="display:inline-flex;align-items:center;margin:0">Restaurar backup JSON</label>
+      <input id="restoreFile" type="file" accept=".json,application/json" style="display:none">
+    </div>
+   </div>
+  </section>
+
+  <!-- CONFIGURAÇÕES -->
+  <section class="page" id="settings">
+   <div class="card">
+    <h2>Preferências de avaliação</h2>
+    <div class="fields">
+      <div class="field full"><label>Instrutor / cabeçalho do relatório</label><input id="instructorName" value="Instrutor Diego Andrade"></div>
+      <div class="field full"><label>Observação padrão do relatório</label><textarea id="reportDisclaimer">Avaliação de treinamento. Não é documento oficial do Detran-RJ.</textarea></div>
+    </div>
+    <div class="btns"><button type="button" class="btn primary" id="saveSettings">Salvar preferências</button></div>
+   </div>
+   <div class="card">
+    <h2>Privacidade e dados</h2>
+    <div class="btns"><button type="button" class="btn danger" id="wipeAll">Apagar todos os dados locais</button></div>
+   </div>
+  </section>
+</div>
+</div>
+
+<script>
+const KEY='diego_instrutor_pro_v12';
+
+/* Catálogo atualizado conforme Portaria DETRAN/RJ Nº 7.120/2026 */
+const catalog=[
+  ["Colocar o veículo em movimento sem a cautela necessária (Art. 169)", 1, "", "Leve (Art. 169)"],
+  ["Olhar para a marcha (Art. 169)", 1, "", "Leve (Art. 169)"],
+  ["Engrenar ou utilizar as marchas incorretamente (Art. 169)", 1, "", "Leve (Art. 169)"],
+  ["Freio de mão acionado ou não liberado por completo (Art. 169)", 1, "", "Leve (Art. 169)"],
+  ["Porta aberta ou semiaberta (Art. 169)", 1, "", "Leve (Art. 169)"],
+  ["Não saber interpretar os instrumentos do painel (Art. 169)", 1, "", "Leve (Art. 169)"],
+  ["Mudança de direção — cautela (Art. 169)", 1, "", "Leve (Art. 169)"],
+  ["Estacionar em desacordo (Art. 181)", 2, "", "Média (Art. 181)"],
+  ["Parar sobre a faixa de pedestre (Art. 183)", 2, "", "Média (Art. 183)"],
+  ["Dirigir com uma das mãos (Art. 252)", 2, "", "Média (Art. 252)"],
+  ["Mudança de direção — seta (Art. 196)", 4, "", "Grave (Art. 196)"],
+  ["Deixar de usar o cinto de segurança (Art. 167)", 4, "", "Grave (Art. 167)"],
+  ["Transitar em contramão de direção em vias com sentido duplo (Art. 186)", 4, "", "Grave (Art. 186)"],
+  ["Deixar de guardar distância lateral e frontal (Art. 192)", 4, "", "Grave (Art. 192)"],
+  ["Deixar de indicar seta com antecedência (Art. 196)", 4, "", "Grave (Art. 196)"],
+  ["Limpador de para-brisas (Art. 230)", 4, "", "Grave (Art. 230)"],
+  ["Dirigir veículo sem usar lentes corretoras de visão (Art. 162)", 6, "", "Gravíssima (Art. 162)"],
+  ["Avançar sobre meio-fio (Art. 193)", 6, "", "Gravíssima (Art. 193)"],
+  ["Avançar semáforo ou parada obrigatória (Art. 208)", 6, "", "Gravíssima (Art. 208)"],
+  ["Apoio", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Não ajustar espelhos retrovisores", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Tentar movimentar em ponto neutro", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Banco não ajustado", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Dar partida com o veículo já engrenado", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Fazer curvas com a tração em neutro", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Fazer conversão incorretamente", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Interromper o funcionamento do motor", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Não conseguir dar partida", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Perder o controle do veículo (raspar meio-fio)", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Perder o controle do veículo (subir meio-fio) + AA (risco iminente)", 0, "incapacidade", "Incapacidade Técnica + AA"],
+  ["Provocar movimentos irregulares, sem justificativa", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Usar a embreagem antes do freio nas frenagens", 0, "incapacidade", "Incapacidade Técnica"],
+  ["Provocar ou assumir risco iminente de acidente (Ocorrência AA)", 6, "", "Ocorrência de Segurança AA"],
+  ["Condutor sem óculos (Ocorrência AB - 6 pts)", 6, "", "Ocorrência de Segurança AB"],
+  ["Tentativa de cola (Candidato que deu ou recebeu)", 6, "", "Eliminação / Cola"]
+];
+
+let memoryStorage = { students: [], lessons: [], settings: { limit: 10, instructor: 'Instrutor Diego Andrade', disclaimer: 'Avaliação de treinamento. Não é documento oficial do Detran-RJ.' } };
+
+function loadDB(){
+  try{
+    let data = localStorage.getItem(KEY);
+    if(data) return JSON.parse(data);
+  }catch(e){}
+  return memoryStorage;
+}
+
+let db = loadDB();
+let faults = [];
+let faultFilter = 'all';
+let studentFilterStatus = 'all';
+let editingStudent = null;
+let editingLesson = null;
+let currentSummaryData = null;
+let currentStudentPhoto = null;
+let selectedStudentId = null;
+
+// Estados para o Orçamento e Cadastro
+let selectedBudgetCat = 'Carro (Cat. B)';
+let selectedBudgetPkg = '15 Aulas (Completo)';
+let selectedPaymentMode = 'Pix (À vista)';
+
+// Estados específicos para o Cadastro de Alunos
+let regSelectedCat = 'B';
+let regSelectedPackageNum = 15;
+let selectedRegPaymentMode = 'Pix (À vista)';
+
+function $(id){ return document.getElementById(id); }
+
+function showToast(message, isError = false) {
+  let container = $('toastContainer');
+  if(!container) return;
+  container.innerHTML = '';
+  let t = document.createElement('div');
+  t.className = 'toast' + (isError ? ' error' : '');
+  t.innerHTML = `<div class="toast-icon">${isError ? '✕' : '✓'}</div> <div>${esc(message)}</div>`;
+  container.appendChild(t);
+  setTimeout(() => { if(t.parentNode) t.remove(); }, 3200);
+}
+
+function persist(){
+  try{ localStorage.setItem(KEY, JSON.stringify(db)); }catch(e){ memoryStorage = db; }
+}
+
+function id(){ return Date.now() + Math.floor(Math.random() * 999); }
+function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c] || c)); }
+function dateNow(){ return new Date().toLocaleDateString('en-CA'); }
+function points(fs){ return (fs || []).reduce((a, f) => a + Number(f.p || 0), 0); }
+function incapacidadeCount(fs){ return (fs || []).filter(f => f.p === 0 || f.cat === 'incapacidade').length; }
+
+function severity(p, cat, tagCode){
+  if(cat === 'incapacidade' || p === 0) return tagCode || 'Incapacidade Técnica';
+  return ({1:'Leve', 2:'Média', 4:'Grave', 6:'Gravíssima'})[p] || (tagCode ? tagCode : 'Personalizada');
+}
+
+/* TEMA LUZ DO SOL / MODO ESCURO */
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  let isLight = document.body.classList.contains('light-mode');
+  localStorage.setItem('diego_app_theme', isLight ? 'light' : 'dark');
+}
+
+if(localStorage.getItem('diego_app_theme') === 'light') {
+  document.body.classList.add('light-mode');
+}
+
+function formatPhoneForZap(phone) {
+  if (!phone) return '';
+  let clean = phone.replace(/\D/g, '');
+  if (!clean) return '';
+  if (clean.length === 10 || clean.length === 11) {
+    clean = '55' + clean;
+  }
+  return clean;
+}
+
+/* ==========================================
+   SELEÇÃO DE FOTO VIA FICHEIRO/GALERIA
+   ========================================== */
+
+function setupPhotoInputs() {
+  const galleryInput = $('galleryInput');
+  const choosePhotoBtn = $('choosePhotoBtn');
+
+  if (choosePhotoBtn) {
+    choosePhotoBtn.onclick = () => { if (galleryInput) galleryInput.click(); };
+  }
+
+  async function processSelectedPhoto(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    if (!file.type || !file.type.startsWith('image/')) {
+      showToast('Selecione um arquivo de imagem válido.', true);
+      event.target.value = '';
+      return;
+    }
+
+    try {
+      showToast('Processando foto...');
+      const photo = await resizeAndCompressImage(file, 500, 500, 0.75);
+      currentStudentPhoto = photo;
+      updatePhotoPreview(photo);
+      showToast('Foto adicionada com sucesso!');
+    } catch (error) {
+      console.error('Erro ao processar foto:', error);
+      showToast('Não foi possível carregar essa foto.', true);
+    } finally {
+      event.target.value = '';
+    }
+  }
+
+  if (galleryInput) galleryInput.onchange = processSelectedPhoto;
+}
+
+function resizeAndCompressImage(file, maxWidth = 300, maxHeight = 300, quality = 0.7) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Não foi possível ler o arquivo.'));
+    reader.onload = event => {
+      const img = new Image();
+      img.onerror = () => reject(new Error('Não foi possível abrir a imagem.'));
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        const ratio = Math.min(1, maxWidth / width, maxHeight / height);
+        width = Math.max(1, Math.round(width * ratio));
+        height = Math.max(1, Math.round(height * ratio));
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { reject(new Error('Não foi possível processar a imagem.')); return; }
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+setupPhotoInputs();
+
+function openPhotoZoom(photoUrl, studentName) {
+  if(!photoUrl) return;
+  let modalContainer = $('modalContainer');
+  if(!modalContainer) return;
+  modalContainer.innerHTML = `
+    <div class="photo-zoom-overlay" onclick="closePhotoZoom()">
+      <div class="photo-zoom-container" onclick="event.stopPropagation()">
+        <img src="${photoUrl}" alt="Foto Ampliada">
+        <div class="photo-zoom-name">👤 ${esc(studentName)}</div>
+        <button type="button" class="btn secondary small" style="margin-top:12px;" onclick="closePhotoZoom()">Fechar</button>
+      </div>
+    </div>
+  `;
+}
+window.openPhotoZoom = openPhotoZoom;
+
+function closePhotoZoom() {
+  let modalContainer = $('modalContainer');
+  if(modalContainer) modalContainer.innerHTML = '';
+}
+window.closePhotoZoom = closePhotoZoom;
+
+/* ==========================================
+   LÓGICA DE CADASTRO
+   ========================================== */
+function setRegCategory(catText) {
+  regSelectedCat = catText.includes('Carro') ? 'B' : 'A';
+  $('regBtnCatB').classList.toggle('active', regSelectedCat === 'B');
+  $('regBtnCatA').classList.toggle('active', regSelectedCat === 'A');
+}
+window.setRegCategory = setRegCategory;
+
+function setRegPackage(pkgName, numAulas, btnEl) {
+  let customContainer = $('regCustomPackageContainer');
+  if(numAulas === 'outro') {
+    regSelectedPackageNum = 15;
+    if(customContainer) customContainer.style.display = 'block';
+    let customInput = $('regCustomPackageInput');
+    if(customInput && !customInput.value) customInput.value = '15';
+  } else {
+    regSelectedPackageNum = numAulas;
+    if(customContainer) customContainer.style.display = 'none';
+  }
+
+  let grid = btnEl.parentNode;
+  grid.querySelectorAll('.budget-opt-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+}
+window.setRegPackage = setRegPackage;
+
+function updateRegCustomPackageVal(val) {
+  let num = parseInt(val);
+  if(!isNaN(num) && num > 0) {
+    regSelectedPackageNum = num;
+  }
+}
+window.updateRegCustomPackageVal = updateRegCustomPackageVal;
+
+function setRegPaymentMode(mode) {
+  selectedRegPaymentMode = mode;
+  $('regPayPix').classList.remove('active');
+  $('regPayDebit').classList.remove('active');
+  $('regPayCredit').classList.remove('active');
+
+  let creditContainer = $('regCreditContainer');
+  if (mode.includes('Pix')) {
+    $('regPayPix').classList.add('active');
+    creditContainer.style.display = 'none';
+  } else if (mode.includes('Débito')) {
+    $('regPayDebit').classList.add('active');
+    creditContainer.style.display = 'none';
+  } else if (mode.includes('Crédito')) {
+    $('regPayCredit').classList.add('active');
+    creditContainer.style.display = 'block';
+    updateRegCreditText();
+  }
+}
+window.setRegPaymentMode = setRegPaymentMode;
+
+function updateRegCreditText() {
+  let sel = $('regInstallments');
+  if (sel) {
+    selectedRegPaymentMode = `Cartão de Crédito em ${sel.value}`;
+  }
+}
+window.updateRegCreditText = updateRegCreditText;
+
+
+/* ==========================================
+   LÓGICA DO ORÇAMENTO ZAP REFORMULADO
+   ========================================== */
+function setBudgetCategory(cat) {
+  selectedBudgetCat = cat;
+  $('btnCatB').classList.toggle('active', cat.includes('Carro'));
+  $('btnCatA').classList.toggle('active', cat.includes('Moto'));
+}
+window.setBudgetCategory = setBudgetCategory;
+
+function setBudgetPackage(pkgName, btnEl) {
+  selectedBudgetPkg = pkgName;
+  let grid = btnEl.parentNode;
+  grid.querySelectorAll('.budget-opt-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+}
+window.setBudgetPackage = setBudgetPackage;
+
+function setPaymentMode(mode) {
+  selectedPaymentMode = mode;
+  $('payPix').classList.remove('active');
+  $('payDebit').classList.remove('active');
+  $('payCredit').classList.remove('active');
+
+  let creditContainer = $('creditInstallmentsContainer');
+  if (mode.includes('Pix')) {
+    $('payPix').classList.add('active');
+    creditContainer.style.display = 'none';
+  } else if (mode.includes('Débito')) {
+    $('payDebit').classList.add('active');
+    creditContainer.style.display = 'none';
+  } else if (mode.includes('Crédito')) {
+    $('payCredit').classList.add('active');
+    creditContainer.style.display = 'block';
+    updateCreditPaymentText();
+  }
+}
+window.setPaymentMode = setPaymentMode;
+
+function updateCreditPaymentText() {
+  let sel = $('bInstallments');
+  if (sel) {
+    selectedPaymentMode = `Cartão de Crédito em ${sel.value}`;
+  }
+}
+window.updateCreditPaymentText = updateCreditPaymentText;
+
+function sendBudgetWhatsApp() {
+  let client = $('bClientName') ? $('bClientName').value.trim() : '';
+  let price = $('bPrice') ? $('bPrice').value.trim() : '';
+  let obs = $('bObs') ? $('bObs').value.trim() : '';
+  let phone = $('bPhone') ? $('bPhone').value.trim() : '';
+
+  let text = `🚗💨 *ORÇAMENTO DE AULAS PRÁTICAS* 🏁\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  if(client) text += `👤 *Cliente:* ${client}\n`;
+  text += `🚘 *Veículo/Categoria:* ${selectedBudgetCat}\n`;
+  text += `📦 *Pacote:* ${selectedBudgetPkg}\n`;
+  if(price) text += `💰 *Valor Total:* R$ ${price}\n`;
+  text += `💳 *Forma de Pagamento:* ${selectedPaymentMode}\n`;
+  if(obs) text += `📌 *Detalhes:* ${obs}\n`;
+  text += `\n👨‍🏫 *Instrutor:* Diego Andrade (Detran-RJ)\n`;
+  text += `📱 *Instagram:* @InstrutorDiegoAndrade\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `✨ *Garanta sua vaga e venha conquistar sua CNH!*`;
+
+  let cleanPhone = formatPhoneForZap(phone);
+  let encoded = encodeURIComponent(text);
+  let url = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encoded}` : `https://wa.me/?text=${encoded}`;
+  window.open(url, '_blank');
+  showToast('Orçamento gerado e pronto para envio!');
+}
+window.sendBudgetWhatsApp = sendBudgetWhatsApp;
+
+
+/* ==========================================
+   RAIO-X DE ERROS RECORRENTES
+   ========================================== */
+function openStudentErrorsModal(studentId) {
+  let s = db.students.find(x => x.id === studentId);
+  if(!s) return;
+  let modalContainer = $('modalContainer');
+  if(!modalContainer) return;
+
+  let studentLessons = db.lessons.filter(l => l.studentId === s.id || (l.student && l.student.toLowerCase().trim() === s.name.toLowerCase().trim()));
+  
+  let faultCounts = {};
+  studentLessons.forEach(l => {
+    (l.faults || []).forEach(f => {
+      faultCounts[f.name] = (faultCounts[f.name] || 0) + 1;
+    });
+  });
+
+  let sortedFaults = Object.entries(faultCounts).sort((a,b) => b[1] - a[1]);
+
+  let topErrorsHtml = sortedFaults.length ? sortedFaults.map(([name, count], index) => `
+    <div style="background:var(--input-bg); border:1px solid var(--line); border-radius:10px; padding:8px 12px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <strong style="font-size:12px; color:var(--txt);">${index + 1}º. ${esc(name)}</strong>
+      </div>
+      <span class="tag p2">${count} vez${count > 1 ? 'es' : ''}</span>
+    </div>
+  `).join('') : '<div class="empty">Nenhum erro registrado nas aulas deste aluno.</div>';
+
+  modalContainer.innerHTML = `
+    <div class="modal-overlay" onclick="closeStudentErrorsModal()">
+      <div class="modal-card" style="max-width:420px; text-align:left;" onclick="event.stopPropagation()">
+        <div class="head" style="margin-bottom:12px;">
+          <h2>Raio-X de Erros: ${esc(s.name)}</h2>
+          <button type="button" class="btn secondary small" onclick="closeStudentErrorsModal()">✕</button>
+        </div>
+        <p class="tiny" style="margin-bottom:12px;">Top erros cometidos nas ${studentLessons.length} aula(s) registradas:</p>
+        <div style="max-height:280px; overflow-y:auto; padding-right:2px;">
+          ${topErrorsHtml}
+        </div>
+        <div class="btns" style="margin-top:16px;">
+          <button type="button" class="btn primary" style="width:100%;" onclick="closeStudentErrorsModal()">Fechar Raio-X</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+window.openStudentErrorsModal = openStudentErrorsModal;
+
+function closeStudentErrorsModal() {
+  let modalContainer = $('modalContainer');
+  if(modalContainer) modalContainer.innerHTML = '';
+}
+window.closeStudentErrorsModal = closeStudentErrorsModal;
+
+
+/* ==========================================
+   CARTÃO DE APROVAÇÃO
+   ========================================== */
+function openApprovedCardModal(studentId) {
+  let s = db.students.find(x => x.id === studentId);
+  if(!s) return;
+  let modalContainer = $('modalContainer');
+  if(!modalContainer) return;
+
+  let avatarImg = s.photo ? `<img src="${s.photo}" style="width:90px; height:90px; border-radius:50%; object-fit:cover; object-position: center center; border:3px solid var(--cyan); box-shadow:0 5px 15px rgba(0,0,0,0.4);">` : `<div style="width:90px; height:90px; border-radius:50%; background:var(--panel2); border:3px solid var(--cyan); display:grid; place-items:center; font-size:36px; color:var(--muted);">👤</div>`;
+
+  modalContainer.innerHTML = `
+    <div class="modal-overlay" onclick="closeApprovedCardModal()">
+      <div class="modal-card" style="max-width:380px; padding:24px;" onclick="event.stopPropagation()">
+        
+        <!-- CARTÃO VISUAL GERADO -->
+        <div id="approvedCardVisual" style="background:linear-gradient(135deg, #0b1525, #121d2e); border:2px solid var(--cyan); border-radius:20px; padding:22px; text-align:center; color:#f4f7fb; box-shadow:0 15px 30px rgba(0,0,0,0.7); position:relative; overflow:hidden;">
+          <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); font-weight:900; margin-bottom:4px;">Exame Prático DETRAN-RJ</div>
+          <h2 style="font-size:20px; margin:0 0 14px 0; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.5);">🎉 HABILITADO(A)!</h2>
+          
+          <div style="display:flex; justify-content:center; margin-bottom:12px;">
+            ${avatarImg}
+          </div>
+          
+          <h3 style="font-size:17px; margin:0 0 4px 0; color:var(--txt);">${esc(s.name)}</h3>
+          <p style="font-size:11px; color:var(--muted); margin:0 0 14px 0;">Categoria ${esc(s.category || 'B')} • Aprovado(a) em ${s.approvedDate || dateNow()}</p>
+          
+          <div style="background:rgba(66, 215, 160, 0.15); border:1px solid var(--green); color:var(--green); border-radius:10px; padding:6px; font-size:11px; font-weight:800; margin-bottom:12px;">
+            ✓ CNH GARANTIDA COM SUCESSO!
+          </div>
+
+          <div style="font-size:10px; color:var(--muted); border-top:1px solid var(--line); padding-top:8px;">
+            Instrutor Diego Andrade • @InstrutorDiegoAndrade
+          </div>
+        </div>
+
+        <p class="tiny" style="margin:12px 0 14px 0;">Dica: Tire um print deste cartão ou compartilhe com o aluno!</p>
+        
+        <div class="modal-btns">
+          <button type="button" class="btn secondary" onclick="closeApprovedCardModal()">Fechar</button>
+          <button type="button" class="btn primary" onclick="sendApprovedCardWhatsApp('${esc(s.phone || '')}', '${esc(s.name)}')">📲 Enviar p/ WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+window.openApprovedCardModal = openApprovedCardModal;
+
+function closeApprovedCardModal() {
+  let modalContainer = $('modalContainer');
+  if(modalContainer) modalContainer.innerHTML = '';
+}
+window.closeApprovedCardModal = closeApprovedCardModal;
+
+function sendApprovedCardWhatsApp(phone, studentName) {
+  let cleanPhone = formatPhoneForZap(phone);
+  let text = encodeURIComponent(`🎉🚗 PARABÉNS, ${studentName}! Aprovado(a) no exame prático e com a CNH garantida! Muito sucesso nessa nova conquista! 🏁✨\n\n- Instrutor Diego Andrade (@InstrutorDiegoAndrade)`);
+  let url = cleanPhone ? `https://wa.me/${cleanPhone}?text=${text}` : `https://wa.me/?text=${text}`;
+  window.open(url, '_blank');
+  closeApprovedCardModal();
+}
+window.sendApprovedCardWhatsApp = sendApprovedCardWhatsApp;
+
+
+function openStudentPicker() {
+  let modalContainer = $('modalContainer');
+  if(!modalContainer) return;
+
+  let studentsList = db.students.slice().sort((a,b) => a.name.localeCompare(b.name));
+
+  modalContainer.innerHTML = `
+    <div class="student-picker-modal" onclick="closeStudentPicker()">
+      <div class="student-picker-card" onclick="event.stopPropagation()">
+        <div class="head">
+          <h2>Selecionar Aluno</h2>
+          <button type="button" class="btn secondary small" onclick="closeStudentPicker()">✕ Fechar</button>
+        </div>
+        <div class="field" style="margin-top:10px;">
+          <input id="pickerSearch" placeholder="Pesquisar aluno por nome..." oninput="filterPickerList(this.value)">
+        </div>
+        <div class="student-picker-list" id="pickerListContainer">
+          ${renderPickerItems(studentsList)}
+        </div>
+      </div>
+    </div>
+  `;
+  setTimeout(() => { let i = $('pickerSearch'); if(i) i.focus(); }, 50);
+}
+window.openStudentPicker = openStudentPicker;
+
+function closeStudentPicker() {
+  let modalContainer = $('modalContainer');
+  if(modalContainer) modalContainer.innerHTML = '';
+}
+window.closeStudentPicker = closeStudentPicker;
+
+function renderPickerItems(list) {
+  if(!list.length) return '<div class="empty">Nenhum aluno cadastrado.</div>';
+  return list.map(s => {
+    let done = getStudentDoneLessonsCount(s.id, s.name);
+    let pkg = s.package || 15;
+    let avatarHtml = s.photo 
+      ? `<img src="${s.photo}" alt="Foto">` 
+      : `👤`;
+
+    return `
+      <div class="student-picker-item" onclick="selectStudentFromPicker(${s.id})">
+        <div class="picker-avatar">${avatarHtml}</div>
+        <div class="picker-info">
+          <strong>${esc(s.name)}</strong>
+          <small>Categoria ${esc(s.category || 'B')} · Aulas: ${done}/${pkg}</small>
+        </div>
+        <span style="color:var(--cyan); font-weight:800; font-size:11px;">Selecionar →</span>
+      </div>
+    `;
+  }).join('');
+}
+
+window.filterPickerList = q => {
+  let query = q.toLowerCase().trim();
+  let filtered = db.students.filter(s => s.name.toLowerCase().includes(query));
+  let container = $('pickerListContainer');
+  if(container) container.innerHTML = renderPickerItems(filtered);
+};
+
+window.selectStudentFromPicker = sid => {
+  let s = db.students.find(x => x.id === sid);
+  if(s) {
+    selectedStudentId = s.id;
+    updateActiveStudentHeader(s);
+    if($('lNumber')) $('lNumber').value = 1;
+    renderLesson();
+  }
+  closeStudentPicker();
+};
+
+function updateActiveStudentHeader(s) {
+  let nameEl = $('activeStudentHeaderName');
+  let infoEl = $('activeStudentHeaderInfo');
+  if(!nameEl || !infoEl) return;
+
+  if(s) {
+    let done = getStudentDoneLessonsCount(s.id, s.name);
+    let pkg = s.package || 15;
+    nameEl.textContent = s.name;
+    infoEl.innerHTML = `Categoria <b style="color:var(--cyan);">${s.category || 'B'}</b> · Aulas concluídas: <b style="color:var(--cyan);">${done} / ${pkg}</b>`;
+  } else {
+    nameEl.textContent = 'Nenhum aluno selecionado';
+    infoEl.textContent = 'Toque em "Trocar Aluno" para escolher.';
+  }
+}
+
+function go(page){
+  document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === page));
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  if(page === 'dashboard') renderDashboard();
+  if(page === 'students') renderStudents();
+  if(page === 'history') renderHistory();
+  if(page === 'lesson') renderLesson();
+  if(page === 'examList') renderExamList();
+  if(page === 'approved') renderApproved();
+  if(page === 'failed') renderFailed();
+  const main = document.querySelector('.main-content');
+  if(main) main.scrollTop = 0;
+}
+window.go = go;
+
+document.querySelectorAll('#nav button').forEach(b => { b.onclick = () => go(b.dataset.page); });
+
+const practiceCheckIds = ['lParking','lTraffic','lControls','lIndependent','lHills','lReverse','lLanes','lTurns','lRoundabouts','lNight'];
+
+function newLesson(){
+  editingLesson = null;
+  selectedStudentId = null;
+  faults = [];
+  ['lRoute','lFeedback'].forEach(x => { if($(x))$(x).value = ''; });
+  updateActiveStudentHeader(null);
+  if($('lNumber'))$('lNumber').value = '1';
+  practiceCheckIds.forEach(x => { if($(x))$(x).checked = false; });
+  if($('editingLabel'))$('editingLabel').textContent = 'Nova avaliação';
+  renderLesson();
+  go('lesson');
+}
+window.newLesson = newLesson;
+
+if($('sStart'))$('sStart').value = dateNow();
+
+function updatePhotoPreview(imgData) {
+  let container = $('avatarPreviewContainer');
+  let removeBtn = $('removePhotoBtn');
+  if(imgData) {
+    container.innerHTML = `<img src="${imgData}" alt="Foto do aluno" onclick="event.stopPropagation(); openPhotoZoom('${imgData}', 'Foto Atual')">`;
+    if(removeBtn) removeBtn.style.display = 'inline-block';
+  } else {
+    container.innerHTML = '👤';
+    if(removeBtn) removeBtn.style.display = 'none';
+  }
+}
+
+if($('avatarPreviewContainer')) {
+  $('avatarPreviewContainer').onclick = () => {
+    if(currentStudentPhoto) openPhotoZoom(currentStudentPhoto, 'Foto Atual');
+  };
+}
+
+if($('removePhotoBtn')) {
+  $('removePhotoBtn').onclick = () => {
+    currentStudentPhoto = null;
+    updatePhotoPreview(null);
+  };
+}
+
+function getStudentDoneLessonsCount(studentId, studentName){
+  if(!studentId && !studentName) return 0;
+  return db.lessons.filter(l => {
+    let matchId = studentId && l.studentId === studentId;
+    let matchName = studentName && l.student && l.student.toLowerCase().trim() === studentName.toLowerCase().trim();
+    return matchId || matchName;
+  }).reduce((sum, l) => sum + (parseInt(l.number) || 1), 0);
+}
+
+if($('saveStudent')){$('saveStudent').onclick = () => {
+    let name = $('sName').value.trim();
+    if(!name){ showToast('Informe o nome completo do aluno.', true); return; }
+
+    let data = {
+      name: name,
+      phone: $('sPhone').value.trim(),
+      address: $('sAddress') ? $('sAddress').value.trim() : '',
+      category: regSelectedCat,
+      package: regSelectedPackageNum,
+      price: $('sPrice') ? $('sPrice').value.trim() : '',
+      paymentMode: selectedRegPaymentMode,
+      start: $('sStart').value,
+      notes: $('sNotes').value.trim(),
+      photo: currentStudentPhoto || null,
+      examStatus: 'cursando'
+    };
+    if(editingStudent){
+      let st = db.students.find(s => s.id === editingStudent);
+      if(st) Object.assign(st, data);
+    } else {
+      db.students.push({ id: id(), ...data, created: new Date().toISOString() });
+    }
+    persist();
+    resetStudentForm();
+    renderStudents();
+    renderDashboard();
+    showToast('Aluno salvo com sucesso!');
+    go('students');
+  };
+}
+
+function resetStudentForm(){
+  editingStudent = null;
+  currentStudentPhoto = null;
+  updatePhotoPreview(null);
+  if($('studentFormTitle'))$('studentFormTitle').textContent = 'Cadastrar Novo Aluno';
+  if($('saveStudent'))$('saveStudent').textContent = 'Salvar aluno';
+  if($('cancelStudentEdit'))$('cancelStudentEdit').style.display = 'none';
+  ['sName','sPhone','sAddress','sNotes','sPrice','regCustomPackageInput'].forEach(x => { if($(x))$(x).value = ''; });
+  if($('regCustomPackageContainer')) $('regCustomPackageContainer').style.display = 'none';
+  
+  regSelectedCat = 'B';
+  $('regBtnCatB').classList.add('active');
+  $('regBtnCatA').classList.remove('active');
+
+  regSelectedPackageNum = 15;
+  let pkgBtns = document.querySelectorAll('#register .budget-options-grid');
+  if(pkgBtns[1]) {
+    pkgBtns[1].querySelectorAll('.budget-opt-btn').forEach((b, idx) => {
+      b.classList.toggle('active', idx === 3);
+    });
+  }
+
+  if($('sStart'))$('sStart').value = dateNow();
+  setRegPaymentMode('Pix (À vista)');
+}
+
+if($('cancelStudentEdit'))$('cancelStudentEdit').onclick = resetStudentForm;
+
+function editStudent(sid){
+  let s = db.students.find(x => x.id === sid);
+  if(!s) return;
+  editingStudent = sid;
+  currentStudentPhoto = s.photo || null;
+  updatePhotoPreview(currentStudentPhoto);
+
+  if($('studentFormTitle'))$('studentFormTitle').textContent = 'Editar Aluno';
+  if($('saveStudent'))$('saveStudent').textContent = 'Atualizar aluno';
+  if($('cancelStudentEdit'))$('cancelStudentEdit').style.display = 'inline-block';
+  if($('sName'))$('sName').value = s.name;
+  if($('sPhone'))$('sPhone').value = s.phone || '';
+  if($('sAddress'))$('sAddress').value = s.address || '';
+  
+  regSelectedCat = s.category || 'B';
+  $('regBtnCatB').classList.toggle('active', regSelectedCat === 'B');
+  $('regBtnCatA').classList.toggle('active', regSelectedCat === 'A');
+
+  regSelectedPackageNum = s.package || 15;
+  let pkgBtns = document.querySelectorAll('#register .budget-options-grid');
+  if(pkgBtns[1]) {
+    let matched = false;
+    pkgBtns[1].querySelectorAll('.budget-opt-btn').forEach((b, idx) => {
+      let isMatch = b.textContent.includes(regSelectedPackageNum + ' Aulas');
+      b.classList.toggle('active', isMatch);
+      if(isMatch) matched = true;
+    });
+    if(!matched) {
+      let outroBtn = pkgBtns[1].querySelectorAll('.budget-opt-btn')[5];
+      if(outroBtn) outroBtn.classList.add('active');
+      if($('regCustomPackageContainer')) $('regCustomPackageContainer').style.display = 'block';
+      if($('regCustomPackageInput')) $('regCustomPackageInput').value = regSelectedPackageNum;
+    } else {
+      if($('regCustomPackageContainer')) $('regCustomPackageContainer').style.display = 'none';
+    }
+  }
+
+  if($('sPrice'))$('sPrice').value = s.price || '';
+  if($('sStart'))$('sStart').value = s.start || '';
+  if($('sNotes'))$('sNotes').value = s.notes || '';
+  
+  if (s.paymentMode) {
+    if (s.paymentMode.includes('Pix')) setRegPaymentMode('Pix (À vista)');
+    else if (s.paymentMode.includes('Débito')) setRegPaymentMode('Cartão de Débito');
+    else if (s.paymentMode.includes('Crédito')) {
+      setRegPaymentMode('Cartão de Crédito');
+      let parts = s.paymentMode.split(' em ');
+      if(parts[1] && $('regInstallments')) $('regInstallments').value = parts[1];
+    }
+  } else {
+    setRegPaymentMode('Pix (À vista)');
+  }
+
+  go('register');
+}
+window.editStudent = editStudent;
+
+function setStudentFilter(status, btnElement) {
+  studentFilterStatus = status;
+  if (btnElement) {
+    document.querySelectorAll('#studentStatusTabs .tab').forEach(t => t.classList.remove('active'));
+    btnElement.classList.add('active');
+  }
+  renderStudents();
+}
+window.setStudentFilter = setStudentFilter;
+
+function promptSendToExamEarly(sid) {
+  let s = db.students.find(x => x.id === sid);
+  if(!s) return;
+  let modalContainer = $('modalContainer');
+  if(!modalContainer) return;
+  
+  let done = getStudentDoneLessonsCount(s.id, s.name);
+  let pkg = s.package || 15;
+
+  modalContainer.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-icon warning">📌</div>
+        <h3>Enviar p/ Prova Antecipadamente</h3>
+        <p>O aluno <b>${esc(s.name)}</b> realizou <b>${done}</b> de <b>${pkg}</b> aulas contratadas.<br><br>Deseja encaminhá-lo para a <b>Lista de Prova</b> mesmo antes de concluir todas as aulas?</p>
+        <div class="modal-btns">
+          <button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button>
+          <button type="button" class="btn warning" onclick="confirmSendToExamEarly(${s.id})">Sim, enviar p/ Prova</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+window.promptSendToExamEarly = promptSendToExamEarly;
+
+function confirmSendToExamEarly(sid) {
+  closeModal();
+  setStudentExamStatus(sid, 'aguardando');
+  showToast('Aluno encaminhado para a Lista de Prova!');
+}
+window.confirmSendToExamEarly = confirmSendToExamEarly;
+
+function closeModal() {
+  let modalContainer = $('modalContainer');
+  if(modalContainer) modalContainer.innerHTML = '';
+}
+window.closeModal = closeModal;
+
+function renderStudents(){
+  if(!$('studentList')) return;
+  let q = $('studentSearch') ?$('studentSearch').value.toLowerCase().trim() : '';
+  let list = db.students.filter(s => {
+    let matchesSearch = s.name.toLowerCase().includes(q);
+    let done = getStudentDoneLessonsCount(s.id, s.name);
+    let pkg = s.package || 15;
+    let actualStatus = s.examStatus || 'cursando';
+    if (actualStatus === 'cursando' && done >= pkg) actualStatus = 'aguardando';
+
+    if (studentFilterStatus === 'all') return matchesSearch;
+    return matchesSearch && actualStatus === studentFilterStatus;
+  });
+
+  if($('studentCount'))$('studentCount').textContent = `${list.length} aluno(s) na exibição`;
+  
+  $('studentList').innerHTML = list.length ? list.map(s => {
+    let done = getStudentDoneLessonsCount(s.id, s.name);
+    let pkg = s.package || 15;
+    let ls = db.lessons.filter(l => l.studentId === s.id || (l.student && l.student.toLowerCase().trim() === s.name.toLowerCase().trim()));
+    let last = ls[0];
+    
+    let avatarHtml = s.photo 
+      ? `<img src="${s.photo}" onclick="event.stopPropagation(); openPhotoZoom('${s.photo}', '${esc(s.name)}')" alt="Foto">` 
+      : `👤`;
+
+    let statusBadge = '';
+    let showSendExamBtn = false;
+
+    if (s.examStatus === 'aprovado') {
+      statusBadge = '🎉 <b style="color:var(--green)">APROVADO</b><br>';
+    } else if (s.examStatus === 'reprovado') {
+      statusBadge = '🚨 <b style="color:var(--red)">REPROVADO</b><br>';
+    } else if (done >= pkg || s.examStatus === 'aguardando') {
+      statusBadge = '📋 <b style="color:var(--yellow)">AGUARDANDO PROVA</b><br>';
+    } else {
+      statusBadge = '🚘 <b style="color:var(--cyan)">CURSANDO</b><br>';
+      showSendExamBtn = true; // Permite mandar para a prova antecipadamente
+    }
+
+    let payInfo = s.price ? `💰 R$ ${s.price} (${s.paymentMode || 'Pix'})` : '';
+
+    return `<div class="student">
+      <div class="student-card-avatar">${avatarHtml}</div>
+      <div class="student-info">
+        <strong>${esc(s.name)}</strong>
+        <div class="sub">
+          Status: ${statusBadge}
+          Categoria ${esc(s.category||'B')} · Aulas: <b style="color:var(--cyan)">${done} / ${pkg}</b><br>
+          ${s.phone ? '📞 ' + esc(s.phone) + '<br>' : ''}
+          ${payInfo ? payInfo + '<br>' : ''}
+          ${last ? 'Última: ' + esc(last.date) + ' · ' + last.points + ' pts' : 'Sem avaliações'}
+        </div>
+        <div class="btns">
+          <button type="button" class="btn secondary small" onclick="editStudent(${s.id})">Editar</button>
+          <button type="button" class="btn primary small" onclick="startForStudent(${s.id})">Avaliar</button>
+          ${showSendExamBtn ? `<button type="button" class="btn warning small" onclick="promptSendToExamEarly(${s.id})">📌 Enviar p/ Prova</button>` : ''}
+          <button type="button" class="btn success small" onclick="openStudentErrorsModal(${s.id})">📊 Raio-X</button>
+          <button type="button" class="btn danger small" onclick="confirmDeleteStudent(${s.id})">Excluir</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('') : '<div class="empty">Nenhum aluno encontrado para esse filtro.</div>';
+}
+
+window.startForStudent = sid => {
+  newLesson();
+  selectStudentFromPicker(sid);
+  go('lesson');
+};
+
+window.confirmDeleteStudent = sid => {
+  let s = db.students.find(x => x.id === sid);
+  if(!s) return;
+  let modalContainer = $('modalContainer');
+  if(!modalContainer) return;
+  modalContainer.innerHTML = `
+    <div class="modal-overlay" id="deleteModalOverlay">
+      <div class="modal-card">
+        <div class="modal-icon">✕</div>
+        <h3>Excluir Aluno</h3>
+        <p>Deseja realmente excluir <b>${esc(s.name)}</b>?</p>
+        <div class="modal-btns">
+          <button type="button" class="btn secondary" id="cancelDeleteBtn">Cancelar</button>
+          <button type="button" class="btn danger" id="confirmDeleteBtn">Sim, excluir</button>
+        </div>
+      </div>
+    </div>
+  `;
+  $('cancelDeleteBtn').onclick = () => { modalContainer.innerHTML = ''; };
+  $('confirmDeleteBtn').onclick = () => {
+    db.students = db.students.filter(x => x.id !== sid);
+    persist();
+    renderStudents();
+    renderDashboard();
+    renderExamList();
+    renderApproved();
+    renderFailed();
+    modalContainer.innerHTML = '';
+    showToast(`Aluno "${s.name}" excluído.`);
+  };
+};
+
+if($('studentSearch'))$('studentSearch').oninput = renderStudents;
+
+/* =======================================================
+   GERENCIAMENTO DE PROVAS (AGUARDANDO, APROVADO, REPROVADO)
+   ======================================================= */
+
+function setStudentExamStatus(studentId, status) {
+  let s = db.students.find(x => x.id === studentId);
+  if (s) {
+    s.examStatus = status;
+    if (status === 'aprovado') s.approvedDate = dateNow();
+    if (status === 'reprovado') s.failedDate = dateNow();
+    if (status === 'aguardando') {
+      delete s.approvedDate;
+      delete s.failedDate;
+    }
+    persist();
+    renderExamList();
+    renderApproved();
+    renderFailed();
+    renderStudents();
+    renderDashboard();
+    showToast(`Status de ${s.name} atualizado!`);
+  }
+}
+window.setStudentExamStatus = setStudentExamStatus;
+
+function renderExamList() {
+  let container = $('examListContainer');
+  if (!container) return;
+
+  let list = db.students.filter(s => {
+    let done = getStudentDoneLessonsCount(s.id, s.name);
+    let pkg = s.package || 15;
+    return (done >= pkg || s.examStatus === 'aguardando') && s.examStatus !== 'aprovado' && s.examStatus !== 'reprovado';
+  });
+
+  if (!list.length) {
+    container.innerHTML = '<div class="empty">Nenhum aluno aguardando prova no momento.</div>';
+    return;
+  }
+
+  container.innerHTML = list.map(s => {
+    let done = getStudentDoneLessonsCount(s.id, s.name);
+    let pkg = s.package || 15;
+    let avatarHtml = s.photo 
+      ? `<img src="${s.photo}" alt="Foto">` 
+      : `👤`;
+
+    return `<div class="student">
+      <div class="student-card-avatar">${avatarHtml}</div>
+      <div class="student-info">
+        <strong>${esc(s.name)}</strong>
+        <div class="sub">
+          Categoria ${esc(s.category||'B')} · Aulas: <b style="color:var(--cyan)">${done} / ${pkg}</b><br>
+          📞 ${esc(s.phone || 'Sem telefone')}<br>
+          Status: <b style="color:var(--yellow)">Aguardando Prova</b>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn success small" onclick="setStudentExamStatus(${s.id}, 'aprovado')">🎉 Aprovado</button>
+          <button type="button" class="btn danger small" onclick="setStudentExamStatus(${s.id}, 'reprovado')">🚨 Reprovado</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderApproved() {
+  let container = $('approvedListContainer');
+  if (!container) return;
+
+  let list = db.students.filter(s => s.examStatus === 'aprovado');
+
+  if (!list.length) {
+    container.innerHTML = '<div class="empty">Nenhum aluno aprovado registrado.</div>';
+    return;
+  }
+
+  container.innerHTML = list.map(s => {
+    let avatarHtml = s.photo 
+      ? `<img src="${s.photo}" alt="Foto">` 
+      : `👤`;
+
+    return `<div class="student" style="border-color:var(--green)">
+      <div class="student-card-avatar">${avatarHtml}</div>
+      <div class="student-info">
+        <strong>${esc(s.name)}</strong>
+        <div class="sub">
+          Categoria ${esc(s.category||'B')}<br>
+          Data da Aprovação: <b>${s.approvedDate || 'Não informada'}</b><br>
+          <span style="color:var(--green); font-weight:bold;">🎉 HABILITADO / CNH GARANTIDA</span>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn primary small" onclick="openApprovedCardModal(${s.id})">🖼️ Gerar Cartão</button>
+          <button type="button" class="btn secondary small" onclick="setStudentExamStatus(${s.id}, 'aguardando')">🔄 Voltar</button>
+          <button type="button" class="btn danger small" onclick="confirmDeleteStudent(${s.id})">✕</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderFailed() {
+  let container = $('failedListContainer');
+  if (!container) return;
+
+  let list = db.students.filter(s => s.examStatus === 'reprovado');
+
+  if (!list.length) {
+    container.innerHTML = '<div class="empty">Nenhum aluno reprovado registrado.</div>';
+    return;
+  }
+
+  container.innerHTML = list.map(s => {
+    let avatarHtml = s.photo 
+      ? `<img src="${s.photo}" alt="Foto">` 
+      : `👤`;
+
+    return `<div class="student" style="border-color:var(--red)">
+      <div class="student-card-avatar">${avatarHtml}</div>
+      <div class="student-info">
+        <strong>${esc(s.name)}</strong>
+        <div class="sub">
+          Categoria ${esc(s.category||'B')}<br>
+          Data do Exame: <b>${s.failedDate || 'Não informada'}</b><br>
+          Status: <b style="color:var(--red)">Não Aprovado</b>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn secondary small" onclick="setStudentExamStatus(${s.id}, 'aguardando')">🔄 Mover para Prova</button>
+          <button type="button" class="btn danger small" onclick="confirmDeleteStudent(${s.id})">✕ Excluir</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderCatalog(){
+  if(!$('faultCatalog')) return;
+  let list = catalog.map((x, i) => ({ n: x[0], p: x[1], cat: x[2], tagCode: x[3], i })).filter(x => {
+    if(faultFilter === 'all') return true;
+    if(faultFilter === 'incapacidade') return x.cat === 'incapacidade' || x.p === 0;
+    return x.cat !== 'incapacidade' && x.p > 0 && String(x.p) === faultFilter;
+  });
+
+  $('faultCatalog').innerHTML = list.map(x => {
+    let isInc = x.cat === 'incapacidade' || x.p === 0;
+    let tagClass = isInc ? 'p-incapacidade' : (x.p === 0.5 ? 'p05' : 'p' + x.p);
+    let tagText = isInc ? (x.tagCode || 'INCAPACIDADE') : (x.p + ' PT' + (x.p === 1 ? '' : 'S'));
+    return `<button type="button" class="fault" onclick="addFault(${x.i})">
+      <span class="tag ${tagClass}">${esc(tagText)}</span>
+      <strong>${esc(x.n)}</strong>
+      <small>Toque para registrar</small>
+    </button>`;
+  }).join('');
+}
+
+window.addFault = i => {
+  if(!selectedStudentId){
+    showToast('Selecione um aluno antes de registrar falhas.', true);
+    openStudentPicker();
+    return;
+  }
+  let x = catalog[i];
+  faults.push({
+    id: id(),
+    name: x[0],
+    p: x[1],
+    cat: x[2] || '',
+    tagCode: x[3] || '',
+    time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+  });
+  renderLesson();
+};
+
+if($('faultTabs')){$('faultTabs').onclick = e => {
+    let b = e.target.closest('[data-f]');
+    if(!b) return;
+    faultFilter = b.dataset.f;
+    document.querySelectorAll('#faultTabs .tab').forEach(t => t.classList.toggle('active', t === b));
+    renderCatalog();
+  };
+}
+
+if($('addCustom')){$('addCustom').onclick = () => {
+    if(!selectedStudentId){
+      showToast('Selecione um aluno antes de registrar falhas.', true);
+      openStudentPicker();
+      return;
+    }
+    let name = $('customFault').value.trim();
+    if(!name){ showToast('Descreva a falha.', true); return; }
+    let pts = +$('customPoints').value;
+    faults.push({
+      id: id(),
+      name: name,
+      p: pts,
+      cat: pts === 0 ? 'incapacidade' : '',
+      tagCode: '',
+      time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+    });
+    $('customFault').value = '';
+    renderLesson();
+  };
+}
+
+if($('undoFault')){$('undoFault').onclick = () => { faults.pop(); renderLesson(); }; }
+
+function renderLesson(){
+  renderCatalog();
+  let total = points(faults);
+  let incCount = incapacidadeCount(faults);
+  let limit = 10;
+  
+  if($('lPoints'))$('lPoints').textContent = total;
+  if($('lIncapacidade'))$('lIncapacidade').textContent = incCount;
+  if($('l1'))$('l1').textContent = faults.filter(f => f.p === 1 && f.cat !== 'incapacidade').length;
+  if($('l2'))$('l2').textContent = faults.filter(f => f.p === 2 && f.cat !== 'incapacidade').length;
+  if($('faultCount'))$('faultCount').textContent = `${faults.length} falha(s)`;
+
+  if($('livePoints')) $('livePoints').textContent = `${total} / ${limit}`;
+  if($('liveIncap')) $('liveIncap').textContent = `${incCount} / 2`;
+
+  let st = $('lStatus');
+  let liveBadge = $('liveStatusBadge');
+  let livePointsEl = $('livePoints');
+  let liveIncapEl = $('liveIncap');
+  
+  let statusText = '';
+  let isReprovado = false;
+
+  if (incCount >= 2) {
+    statusText = `🔴 REPROVADO (2 Incap.)`;
+    isReprovado = true;
+  } else if (total > limit) {
+    statusText = `🔴 REPROVADO (${total} Pts)`;
+    isReprovado = true;
+  } else {
+    statusText = `🟢 APROVADO`;
+    isReprovado = false;
+  }
+
+  if (liveBadge) {
+    liveBadge.className = 'live-status-badge ' + (isReprovado ? 'bad' : '');
+    liveBadge.textContent = statusText;
+  }
+
+  if (livePointsEl) livePointsEl.style.color = total > 10 ? 'var(--red)' : 'var(--cyan)';
+  if (liveIncapEl) liveIncapEl.style.color = incCount >= 2 ? 'var(--red)' : 'var(--cyan)';
+
+  if (st) {
+    if (isReprovado) {
+      st.className = 'status bad';
+      st.textContent = incCount >= 2 
+        ? `🚨 REPROVADO: Atingiu 2 ou mais Incapacidades Técnicas!` 
+        : `🚨 REPROVADO: Ultrapassou o limite máximo de 10 pontos (${total} pts)`;
+    } else {
+      st.className = 'status';
+      st.textContent = `🟢 APROVADO: Dentro do limite de 10 pontos (${total} pts)`;
+    }
+  }
+
+  if($('faultLog')){$('faultLog').innerHTML = faults.length ? faults.map((f, i) => 
+      `<div class="listrow">
+        <div>
+          <strong>${esc(f.name)}</strong>
+          <small>${severity(f.p, f.cat, f.tagCode)} · ${esc(f.time || '')}</small>
+        </div>
+        <div class="right">
+          <span class="score">${f.p} pt${f.p > 1 ? 's' : ''}</span><br>
+          <button type="button" class="btn danger small" onclick="removeFault(${i})">Remover</button>
+        </div>
+      </div>`
+    ).join('') : '<div class="empty">Ainda não há falhas registradas.</div>';
+  }
+}
+
+window.removeFault = i => { faults.splice(i, 1); renderLesson(); };
+
+function collectLesson(){
+  let sObj = db.students.find(x => x.id === selectedStudentId);
+  if(!sObj){
+    showToast('Selecione um aluno antes de salvar a avaliação.', true);
+    openStudentPicker();
+    return null;
+  }
+  return {
+    id: editingLesson || id(),
+    studentId: sObj.id,
+    student: sObj.name,
+    date: dateNow(),
+    number: $('lNumber').value || '1',
+    category: sObj.category || 'B',
+    route: $('lRoute').value.trim(),
+    feedback: $('lFeedback').value.trim(),
+    practice: {
+      parking: $('lParking') ? $('lParking').checked : false,
+      traffic: $('lTraffic') ? $('lTraffic').checked : false,
+      controls: $('lControls') ? $('lControls').checked : false,
+      independent: $('lIndependent') ? $('lIndependent').checked : false,
+      hills: $('lHills') ? $('lHills').checked : false,
+      reverse: $('lReverse') ? $('lReverse').checked : false,
+      lanes: $('lLanes') ? $('lLanes').checked : false,
+      turns: $('lTurns') ? $('lTurns').checked : false,
+      roundabouts: $('lRoundabouts') ? $('lRoundabouts').checked : false,
+      night: $('lNight') ? $('lNight').checked : false
+    },
+    faults: faults.map(f => ({ ...f })),
+    points: points(faults),
+    incapacidades: incapacidadeCount(faults),
+    created: new Date().toISOString(),
+    limit: 10
+  };
+}
+
+if($('saveLesson')){$('saveLesson').onclick = () => {
+    let r = collectLesson();
+    if(!r) return;
+    let idx = db.lessons.findIndex(l => l.id === r.id);
+    if(idx >= 0) db.lessons[idx] = r;
+    else db.lessons.unshift(r);
+    editingLesson = null;
+    persist();
+    renderDashboard();
+    renderHistory();
+    renderStudents();
+    renderExamList();
+    showToast('Avaliação salva!');
+  };
+}
+
+function clearForm(){
+  editingLesson = null;
+  faults = [];
+  ['lRoute','lFeedback'].forEach(x => { if($(x))$(x).value = ''; });
+  if($('lNumber'))$('lNumber').value = '1';
+  practiceCheckIds.forEach(x => { if($(x))$(x).checked = false; });
+  renderLesson();
+  showToast('Formulário limpo.');
+}
+if($('clearLesson'))$('clearLesson').onclick = clearForm;
+
+function openLesson(lid){
+  let l = db.lessons.find(x => x.id === lid);
+  if(!l) return;
+  editingLesson = l.id;
+  selectedStudentId = l.studentId || null;
+  faults = (l.faults || []).map(f => ({ ...f }));
+  
+  let sObj = db.students.find(x => x.id === l.studentId || x.name.toLowerCase().trim() === l.student.toLowerCase().trim());
+  if(sObj) {
+    selectedStudentId = sObj.id;
+    updateActiveStudentHeader(sObj);
+  } else {
+    updateActiveStudentHeader({ name: l.student, category: l.category || 'B', package: 15 });
+  }
+
+  if($('lNumber'))$('lNumber').value = l.number || '1';
+  if($('lRoute'))$('lRoute').value = l.route || '';
+  if($('lFeedback'))$('lFeedback').value = l.feedback || '';
+  
+  if($('lParking'))$('lParking').checked = !!l.practice?.parking;
+  if($('lTraffic'))$('lTraffic').checked = !!l.practice?.traffic;
+  if($('lControls'))$('lControls').checked = !!l.practice?.controls;
+  if($('lIndependent'))$('lIndependent').checked = !!l.practice?.independent;
+  if($('lHills'))$('lHills').checked = !!l.practice?.hills;
+  if($('lReverse'))$('lReverse').checked = !!l.practice?.reverse;
+  if($('lLanes'))$('lLanes').checked = !!l.practice?.lanes;
+  if($('lTurns'))$('lTurns').checked = !!l.practice?.turns;
+  if($('lRoundabouts'))$('lRoundabouts').checked = !!l.practice?.roundabouts;
+  if($('lNight'))$('lNight').checked = !!l.practice?.night;
+
+  renderLesson();
+  go('lesson');
+}
+window.openLesson = openLesson;
+
+function confirmDeleteLesson(lid){
+  let l = db.lessons.find(x => x.id === lid);
+  if(!l) return;
+  let modalContainer = $('modalContainer');
+  if(!modalContainer) return;
+  modalContainer.innerHTML = `
+    <div class="modal-overlay" id="deleteLessonModalOverlay">
+      <div class="modal-card">
+        <div class="modal-icon">✕</div>
+        <h3>Excluir Avaliação</h3>
+        <p>Deseja excluir a avaliação de <b>${esc(l.student)}</b> do dia <b>${esc(l.date)}</b>?</p>
+        <div class="modal-btns">
+          <button type="button" class="btn secondary" id="cancelDeleteLessonBtn">Cancelar</button>
+          <button type="button" class="btn danger" id="confirmDeleteLessonBtn">Sim, excluir</button>
+        </div>
+      </div>
+    </div>
+  `;
+  $('cancelDeleteLessonBtn').onclick = () => { modalContainer.innerHTML = ''; };
+  $('confirmDeleteLessonBtn').onclick = () => {
+    db.lessons = db.lessons.filter(x => x.id !== lid);
+    persist();
+    renderHistory();
+    renderDashboard();
+    renderStudents();
+    modalContainer.innerHTML = '';
+    showToast('Avaliação excluída com sucesso!');
+  };
+}
+window.confirmDeleteLesson = confirmDeleteLesson;
+
+function renderHistory(){
+  if(!$('historyList')) return;
+  let q = $('hSearch') ?$('hSearch').value.toLowerCase().trim() : '';
+  let res = $('hResult') ?$('hResult').value : 'all';
+  let ls = db.lessons.filter(l => l.student.toLowerCase().includes(q)).filter(l => {
+    let isReprovado = (l.incapacidades ?? incapacidadeCount(l.faults)) >= 2 || l.points > 10;
+    if(res === 'all') return true;
+    if(res === 'within') return !isReprovado;
+    if(res === 'over') return isReprovado;
+    return true;
+  });
+  
+  $('historyList').innerHTML = ls.length ? ls.map(l => {
+    return `<div class="listrow">
+      <div>
+        <strong>${esc(l.student)}</strong>
+        <small>${esc(l.date)} · Aula: ${esc(l.number || '1')} · ${l.points} pts</small>
+      </div>
+      <div class="right" style="display:flex; gap:6px; align-items:center;">
+        <button type="button" class="btn secondary small" onclick="openLesson(${l.id})">Abrir</button>
+        <button type="button" class="btn danger small" onclick="confirmDeleteLesson(${l.id})">Excluir</button>
+      </div>
+    </div>`;
+  }).join('') : '<div class="empty">Nenhuma avaliação encontrada.</div>';
+}
+
+if($('hSearch'))$('hSearch').oninput = renderHistory;
+if($('hResult'))$('hResult').onchange = renderHistory;
+
+function renderDashboard(){
+  let totalStudents = db.students.length;
+  let approvedCount = db.students.filter(s => s.examStatus === 'aprovado').length;
+  let failedCount = db.students.filter(s => s.examStatus === 'reprovado').length;
+  let examsDoneCount = approvedCount + failedCount;
+
+  let waitingCount = db.students.filter(s => {
+    let done = getStudentDoneLessonsCount(s.id, s.name);
+    let pkg = s.package || 15;
+    return (done >= pkg || s.examStatus === 'aguardando') && s.examStatus !== 'aprovado' && s.examStatus !== 'reprovado';
+  }).length;
+
+  let approvedPct = examsDoneCount > 0 ? Math.round(100 * approvedCount / examsDoneCount) : 0;
+  let failedPct = examsDoneCount > 0 ? Math.round(100 * failedCount / examsDoneCount) : 0;
+
+  if($('mStudents')) $('mStudents').textContent = totalStudents;
+  if($('mWaiting')) $('mWaiting').textContent = waitingCount;
+  if($('mApprovedPct')) $('mApprovedPct').textContent = approvedPct + '%';
+  if($('mFailedPct')) $('mFailedPct').textContent = failedPct + '%';
+  if($('mExamsDone')) $('mExamsDone').textContent = examsDoneCount;
+
+  let current = $('dashCurrent');
+  if(current){
+    let lessons = db.lessons;
+    if(lessons.length){
+      let l = lessons[0];
+      current.innerHTML = `<strong>${esc(l.student)}</strong><div class="tiny">${esc(l.date)} · ${l.points} pontos</div><div class="btns"><button type="button" class="btn secondary small" onclick="openLesson(${l.id})">Abrir avaliação</button></div>`;
+    } else {
+      current.innerHTML = '<div class="empty">Nenhuma avaliação salva ainda.</div>';
+    }
+  }
+}
+
+function generateZapText(r){
+  let instr = ($('instructorName') ? $('instructorName').value : '') || 'Instrutor Diego Andrade';
+  let incs = r.incapacidades ?? incapacidadeCount(r.faults);
+  let isReprovado = incs >= 2 || r.points > 10;
+  let sObj = db.students.find(x => x.id === r.studentId || x.name.toLowerCase().trim() === r.student.toLowerCase().trim());
+  let pkgTotal = sObj ? (sObj.package || 15) : 15;
+
+  let text = `🚗💨 *RELATÓRIO DE EVOLUÇÃO* 🏁\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `👤 *Aluno(a):* ${r.student}\n`;
+  text += `👨‍🏫 *Instrutor:* ${instr}\n`;
+  text += `📅 *Data:* ${r.date} | 🚘 *Aula:* ${r.number} de ${pkgTotal}\n`;
+  text += `🏷️ *Categoria:* ${r.category || 'B'}\n`;
+  if (r.route) text += `📍 *Percurso:* ${r.route}\n`;
+
+  let p = r.practice || {};
+  let praticados = [];
+  if (p.parking) praticados.push('🅿️ Baliza & Estacionamento');
+  if (p.traffic) praticados.push('🚦 Domínio no Trânsito');
+  if (p.controls) praticados.push('⚙️ Pedais e Comandos');
+  if (p.independent) praticados.push('🛣️ Condução Independente');
+  if (p.hills) praticados.push('🛑 Controle de Rampa (Aclive)');
+  if (p.reverse) praticados.push('🔄 Alinhamento & Ré');
+  if (p.lanes) praticados.push('🔀 Mudança de Faixa');
+  if (p.turns) praticados.push('↩️ Conversões com Segurança');
+  if (p.roundabouts) praticados.push('🔄 Rotatórias');
+  if (p.night) praticados.push('🌙 Treino Noturno');
+
+  if (praticados.length > 0) {
+    text += `\n🎯 *O QUE TREINAMOS HOJE:*\n`;
+    praticados.forEach(item => { text += `  ✓ ${item}\n`; });
+  }
+
+  text += `\n📝 *PONTOS DE ATENÇÃO:*\n`;
+  if (r.faults && r.faults.length > 0) {
+    r.faults.forEach((f, i) => {
+      let desc = severity(f.p, f.cat, f.tagCode);
+      let ptsStr = (f.p === 0 || f.cat === 'incapacidade') ? 'Incapacidade Técnica' : `${f.p} pt(s)`;
+      text += `  • *${f.name}*\n    └ _${desc} • ${ptsStr}_\n`;
+    });
+  } else {
+    text += `  🌟 *Perfeito! Nenhuma falha cometida na aula!*\n`;
+  }
+
+  text += `\n📊 *RESUMO DO DESEMPENHO:*\n`;
+  text += `• Pontos Perdidos: *${r.points}* (Limite: 10)\n`;
+  text += `• Incapacidades: *${incs}* (Limite: 1)\n\n`;
+
+  if (isReprovado) {
+    text += `📌 *Resultado da Aula:* ⚠️ *PRECISA DE AJUSTES*\n`;
+    text += `💪 _Sem problemas! Cada erro é uma chance de aprender. Foco no treino!_\n`;
+  } else {
+    text += `📌 *Resultado da Aula:* 🎉 *EXCELENTE! DENTRO DA META*\n`;
+    text += `🚀 _Mandou muito bem! Continue com essa mesma dedicação!_\n`;
+  }
+
+  if (r.feedback) {
+    text += `\n💬 *DICA DO INSTRUTOR:*\n`;
+    text += `_"${r.feedback}"_\n`;
+  }
+
+  text += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `🏁 *Rumo à Aprovacão! Vamos pra cima!* 🚗💨`;
+
+  return text;
+}
+
+function sendZapDirectAction(r) {
+  try {
+    let sObj = db.students.find(x => x.id === r.studentId || x.name.toLowerCase().trim() === r.student.toLowerCase().trim());
+    let rawPhone = sObj ? sObj.phone : '';
+    let cleanPhone = formatPhoneForZap(rawPhone);
+
+    if (!cleanPhone) {
+      showToast('O aluno não possui telefone cadastrado! Redirecionando para a lista geral...', true);
+      sendZapGeneralAction(r);
+      return;
+    }
+
+    const texto = encodeURIComponent(generateZapText(r));
+    const urlZap = `https://wa.me/${cleanPhone}?text=${texto}`;
+    showToast(`Abrindo conversa com ${r.student}...`);
+    window.open(urlZap, '_blank');
+  } catch (e) {
+    console.error('Erro ao abrir o WhatsApp:', e);
+    showToast('Erro ao abrir o WhatsApp', true);
+  }
+}
+
+function sendZapGeneralAction(r) {
+  try {
+    const texto = encodeURIComponent(generateZapText(r));
+    const urlZap = `https://wa.me/?text=${texto}`;
+    showToast('Abrindo lista do WhatsApp...');
+    window.open(urlZap, '_blank');
+  } catch (e) {
+    console.error('Erro ao abrir o WhatsApp:', e);
+    showToast('Erro ao abrir o WhatsApp', true);
+  }
+}
+
+function buildReportHtml(r){
+  let instr = ($('instructorName') ? $('instructorName').value : '') || 'Instrutor Diego Andrade';
+  let sObj = db.students.find(x => x.id === r.studentId || x.name.toLowerCase().trim() === r.student.toLowerCase().trim());
+  let photoHtml = sObj && sObj.photo ? `<img src="${sObj.photo}" style="width:50px;height:50px;border-radius:50%;object-fit:cover;object-position:center center;border:1px solid #0284c7;margin-right:10px;vertical-align:middle;">` : '';
+
+  let incs = r.incapacidades ?? incapacidadeCount(r.faults);
+  let isReprovado = incs >= 2 || r.points > 10;
+
+  let p = r.practice || {};
+  let praticados = [];
+  if (p.parking) praticados.push('Estacionamento / Baliza');
+  if (p.traffic) praticados.push('Condução em Trânsito');
+  if (p.controls) praticados.push('Comandos e Controles');
+  if (p.independent) praticados.push('Condução Independente');
+  if (p.hills) praticados.push('Parada em Aclive (Rampa)');
+  if (p.reverse) praticados.push('Manobra de Ré');
+  if (p.lanes) praticados.push('Mudança de Faixa');
+  if (p.turns) praticados.push('Conversões');
+  if (p.roundabouts) praticados.push('Rotatórias');
+  if (p.night) praticados.push('Condução Noturna');
+
+  let faultsListHtml = (r.faults && r.faults.length)
+    ? r.faults.map(f => `<li><b>${esc(f.name)}</b> - <i>${severity(f.p, f.cat, f.tagCode)} (${f.p} pts)</i></li>`).join('')
+    : '<li><i>Nenhuma falha cometida! Excelente!</i></li>';
+
+  return `
+    <div style="font-family: Arial, sans-serif; color: #1e293b; line-height: 1.5;">
+      <div style="display: flex; align-items: center; border-bottom: 3px solid #0284c7; padding-bottom: 12px; margin-bottom: 15px;">
+        ${photoHtml}
+        <div>
+          <h1 style="color: #0f172a; margin: 0; font-size: 18px;">${esc(r.student)}</h1>
+          <p style="color: #64748b; margin: 0; font-size: 11px;">Instrutor: ${esc(instr)} • Data: ${esc(r.date)} • Aula nº ${esc(r.number)}</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 12px; background: #f8fafc; padding: 10px; border-radius: 8px;">
+        <p style="margin: 0 0 4px 0;"><b>Status:</b> ${isReprovado ? '<span style="color:#e11d48;font-weight:bold;">⚠️ Precisa de Ajustes (Reprovado)</span>' : '<span style="color:#16a34a;font-weight:bold;">🎉 Excelente! Aprovado</span>'}</p>
+        <p style="margin: 0;"><b>Pontuação Total:</b> ${r.points} Pts (Máx: 10) | <b>Incapacidades:</b> ${incs} (Máx: 1)</p>
+      </div>
+
+      ${praticados.length ? `<p style="margin: 8px 0 4px 0;"><b>Conteúdos Praticados:</b> ${praticados.join(', ')}</p>` : ''}
+
+      <p style="margin: 12px 0 4px 0;"><b>Pontos de Atenção:</b></p>
+      <ul style="margin: 0; padding-left: 20px; font-size: 11px;">
+        ${faultsListHtml}
+      </ul>
+
+      ${r.feedback ? `<div style="margin-top: 12px; border-top: 1px solid #e2e8f0; padding-top: 8px;"><b>Dica do Instrutor:</b><br><i>${esc(r.feedback)}</i></div>` : ''}
+    </div>
+  `;
+}
+
+if($('btnPreviewSummary')){$('btnPreviewSummary').onclick = () => {
+    let r = collectLesson();
+    if(!r) return;
+    currentSummaryData = r;
+    $('summaryContent').innerHTML = buildReportHtml(r);
+    go('summary');
+  };
+}
+
+if($('sendZapDirect')){$('sendZapDirect').onclick = () => { if(currentSummaryData) sendZapDirectAction(currentSummaryData); }; }
+if($('sendZapGeneral')){$('sendZapGeneral').onclick = () => { if(currentSummaryData) sendZapGeneralAction(currentSummaryData); }; }
+
+if($('saveSettings')){$('saveSettings').onclick = () => {
+    db.settings = { limit: 10, instructor: $('instructorName').value.trim(), disclaimer: $('reportDisclaimer').value.trim() };
+    persist();
+    renderLesson();
+    showToast('Preferências salvas!');
+  };
+}
+
+if($('wipeAll')){$('wipeAll').onclick = () => {
+    if(confirm('Apagar todos os dados?')){
+      db = { students: [], lessons: [], settings: { limit: 10, instructor: 'Instrutor Diego Andrade', disclaimer: '' } };
+      persist();
+      renderAll();
+      showToast('Dados apagados.', true);
+    }
+  };
+}
+
+function renderAll(){
+  if($('instructorName'))$('instructorName').value = db.settings.instructor || 'Instrutor Diego Andrade';
+  if($('reportDisclaimer'))$('reportDisclaimer').value = db.settings.disclaimer || '';
+  renderStudents();
+  renderCatalog();
+  renderLesson();
+  renderHistory();
+  renderDashboard();
+  renderExamList();
+  renderApproved();
+  renderFailed();
+}
+
+renderAll();
+</script>
+</body>
+</html>
